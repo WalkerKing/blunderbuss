@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>使用策略模式实现一个动画</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css" />
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <h2>手写动画</h2>
+  <div id="circle" style="width: 150px;height: 150px;border-radius: 75px;background: #f1a417;position: absolute;"></div>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+  //  首先定义动画策略
+  var tween = { //  t：动画已经持续的时间，b：原始位置，c：总共需要移动的距离，d：动画持续的总时间
+    linear: function( t, b, c, d ){
+      return c*t/d + b;
+    },
+      easeIn: function (t, b, c, d) {
+        return c * (t /= d) * t + b;
+    },
+      strongEaseIn: function (t, b, c, d) {
+        return c * (t /= d) * t * t * t * t + b;
+    },
+      strongEaseOut: function (t, b, c, d) {
+        return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
+    },
+      sineaseIn: function (t, b, c, d) {
+        return c * (t /= d) * t * t + b;
+    },
+      sineaseOut: function (t, b, c, d) {
+        return c * ((t = t / d - 1) * t * t + 1) + b;
+    }
+  };
+    var Animation = function (dom) {
+    this.dom = dom;                   // 进行运动的 dom节点
+    this.startTime = 0;               // 动画开始时间
+    this.startPos = 0;                // 动画开始时，dom节点的位置，即 dom的初始位置
+    this.endPos = 0;                  // 动画结束时，dom节点的位置，即 dom的目标位置
+    this.propertyName = null;         // dom 节点需要被改变的 css属性名
+    this.easing = null;               // 缓动算法
+    this.duration = null;             // 动画持续时间
+  };
+    Animation.prototype.start = function (propertyName, endPos, duration, easing) {
+    this.startTime = +new Date;        // 动画启动时间
+      this.startPos = this.dom.getBoundingClientRect()[propertyName];  // dom 节点初始位置
+    this.propertyName = propertyName;  // dom节点需要被改变的 CSS属性名
+    this.endPos = endPos;  // dom节点目标位置
+    this.duration = duration;   // 动画持续时间
+      this.easing = tween[easing];  // 缓动算法
+    var that = this;
+      var timer = setInterval(function () {
+        if (that.step() === false) {
+          clearInterval(timer);
+        timer = null;
+      }
+      }, 24);
+  };
+    Animation.prototype.step = function () {
+    var t = +new Date;
+      if (t >= this.startTime + this.duration) {
+        this.update(this.endPos);
+      return false;
+    }
+      var pos = this.easing(t - this.startTime, this.startPos, this.endPos - this.startPos, this.duration);
+      this.update(pos);
+  };
+    Animation.prototype.update = function (pos) {
+      this.dom.style[this.propertyName] = pos + 'px';
+  };
+    var gotoHell = new Animation(circle);
+    var gotoHeaven = new Animation(circle);
+    gotoHell.start('left', 500, 5000, 'strongEaseIn');
+    gotoHell.start('top', 500, 5000, 'strongEaseIn');
+    // gotoHeaven.start('left', 2000, 1000, 'linear');
+</script>
+</body>
+
+</html>

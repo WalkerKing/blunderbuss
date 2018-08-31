@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-if</title>
+</head>
+<body>
+
+<div id="app">
+    <h2 v-if="ok">yes</h2>
+    <h2 v-else>no</h2>
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+    <hr>
+    <div v-if="Math.random() > 0.5">随机数大于0.5</div>
+    <div v-else>随机数小于0.5</div>
+    <h2>v-else-if:</h2>
+    <p v-if="no">A</p>
+    <p v-else-if="type === 'B'">A</p>
+    <p v-else-if="type === 'C'">A</p>
+    <p v-else>not A/B/C</p>
+    <hr>
+    <h2>使用key管理可复用的模块</h2>
+    <template v-if="ok">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="user-name-input">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+    </template>
+    <button @click="ok = !ok">toggle login type</button>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            ok: true,
+            no: false,
+            age: 28,
+            name: 'keepfool',
+            type: 'C'
+        }
+    });
+</script>
+</body>
+</html>

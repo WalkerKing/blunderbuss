@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>js中的策略模式</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    pre {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h2>策略模式</h2>
+  <pre>
+    <b>定义</b>
+    策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策
+略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。
+  </pre>
+  <pre>
+    一个基于策略模式的程序至少由两部分组成。第一个部分是一组策略类，策略类封装了具体
+的算法，并负责具体的计算过程。 第二个部分是环境类 Context，Context接受客户的请求，随后
+把请求委托给某一个策略类。要做到这点，说明 Context中要维持对某个策略对象的引用。
+  </pre>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+
+  var strategies = {  //  定义策略
+    'S': function( salary ){
+      return salary * 4 ;
+    },
+    'A': function( salary ){
+      return salary * 3 ;
+    },
+    'B': function( salary ){
+      return salary * 2 ;
+    },
+    'C': function( salary ){
+      return salary * 1 ;
+    }
+  };
+  var calculateBonus = function( level, salary ){   //  定义请求
+    return strategies[ level ]( salary );
+  };
+  console.log( calculateBonus( 'S', 3500 ) );
+
+</script>
+</body>
+</html>

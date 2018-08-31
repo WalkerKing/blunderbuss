@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<select class="" name="" id="s1">
+    <option data-val="1" value="v1">v1</option>
+    <option value="v2">v2</option>
+    <option value="v3">v3</option>
+</select>
+<button id="btn" class="btn btn-info">点击切换第一个选项内容</button>
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+    $('#btn').click(function(){
+        $('[data-val=1]').html('133755454');
+    });
+</script>
+</body>
+</html>

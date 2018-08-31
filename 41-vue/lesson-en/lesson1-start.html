@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Document</title>
+    <style>
+        li.completed {
+            text-decoration: line-through;
+        }
+        .margin-right-10 {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>My Todos {{todoCount}} </h1>
+                <ul class="list-group" v-if="todos.length > 0">
+                    <li class="list-group-item" v-bind:class="{'completed': todo.completed}" v-for="todo in todos">
+                        {{todo.title}}
+                        
+                        <button class="btn btn-danger btn-xs pull-right" @click="deleteTodo(todo)">Delete</button>
+                        <button 
+                            class="btn btn-xs pull-right margin-right-10" 
+                            :class="{'btn-success': todo.completed,'btn-danger': !todo.completed}"
+                            @click="todoComplete(todo)">
+                            {{todo.completed ? 'completed' : 'pending'}}
+                        </button>
+                    </li>
+                </ul>
+                <div v-else>
+                    <p>You don't hava any todos</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <form v-on:submit.prevent="addNewTodo(newTodo)">
+                    <div class="form-group">
+                        <input type="text" class="form-control" v-model="newTodo.title" placeholder="Please enter a new todo">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success">Add todo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://vuejs.org/js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                todos: [{ id: 0, title: 'Study Vue', completed: true}],
+                newTodo: {
+                    id: null,
+                    title: '',
+                    completed: false
+                }
+            },
+            computed: {
+                todoCount: function(){
+                    if(this.todos.length < 3){
+                        return this.todos.length;
+                    }else{
+                        return 'too many'
+                    }
+                }
+            },
+            methods: {
+                addNewTodo: function(newTodo){
+                    if(newTodo.title === '') return;
+                    newTodo.id = this.todos.length;
+                    this.todos.push(newTodo);
+                    this.newTodo = {id: null, title: '',completed: false}
+                },
+                deleteTodo: function(todo){
+                    var idx = this.todos.indexOf(todo);
+                    this.todos.splice(idx, 1);
+                },
+                todoComplete: function(todo){
+                    todo.completed = !todo.completed;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+</head>
+<body>
+
+<div id="app">
+    <p>{{message | capitalize | filter1 }}</p>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'abc'
+        },
+        filters: {
+            capitalize: function( value ){
+                if( !value ){ return '' }
+                value = value.toString();
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            },
+            filter1: function( val ){
+                if( !val ){ return ''; }
+                val = val.toString();
+                return val.slice(0) + val.toUpperCase();
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

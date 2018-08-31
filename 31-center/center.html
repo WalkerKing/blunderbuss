@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    h4 {
+      height: 54px;
+      line-height: 54px;
+      text-align: center;
+      /*background: #aeaeae;*/
+      border: 1px solid #ddd;
+    }
+    s {
+      display: inline-block;
+      margin: 0 auto;
+      width: 100px; height: 30px;
+      line-height: 30px;
+      background: #999;
+    }
+    /*父子均定高，父容器上下等padding*/
+    .outer{ height: 180px; background: #aaa; }
+    .outer:before { /*解决外边距溢出*/
+      content: "";
+      display: table;
+    }
+    .inner{ height: 100px; margin-top:40px; background: #666;}
+  </style>
+</head>
+<body>
+<h1>居中专题</h1>
+<h3>文字的居中</h3>
+<ul>
+  <li>1. 垂直居中，height = line-height </li>
+  <li>2. 水平居中，在父元素上加text-align:center;相对于父元素水平居中</li>
+</ul>
+<h4><s>我的家</s><span>在东北</span></h4>
+<div class="outer">
+  <div class="inner">
+
+  </div>
+</div>
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+
+</script>
+</body>
+</html>

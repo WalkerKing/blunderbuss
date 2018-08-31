@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+	.wrap{
+            width: 40%;
+            margin:0 auto;            
+        }
+        .content{
+            height: 200px;
+            background: #94D0D1;
+            display: none;
+            overflow: hidden;
+        }
+        p{
+            height: 30px;
+            line-height:30px;
+            background: #62f1f4;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            color: #777;
+            font-size: 1.3em;
+            margin: 0;
+            padding: 0;
+        }
+        .dis{
+            display: block;
+        }
+  </style>
+ </head>
+ <body>
+  
+
+  <div class="wrap">
+    <p>click me</p>
+    <div class='content'>大</div>
+    <p>click me</p>
+    <div class='content'>王</div>
+    <p>click me</p>
+    <div class='content'>派</div>
+    <p>click me</p>
+    <div class='content'>我</div>
+    <p>click me</p>
+    <div class='content'>来</div>
+    <p>click me</p>
+    <div class='content'>巡</div>
+    <p>click me</p>
+    <div class='content'>山</div>
+</div>
+
+
+<script type="text/javascript" src="../common/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	 $("p").mousedown(function(){        
+        /*    $(this).next("div").slideToggle(2000);        
+            $(this).next("div").siblings("div").slideUp(2000);
+*/
+
+		$("p").mousedown(function(){
+        $(this).next("div:not(:animated)").slideToggle(2000);
+		$(this).next("div:not(:animated)").siblings("div").slideUp(2000);
+    });
+    });
+
+</script>
+ </body>
+</html>

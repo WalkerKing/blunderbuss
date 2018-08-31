@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$children</title>
+</head>
+<body>
+
+<div id="app">
+    <parent-component></parent-component>
+
+</div>
+<template id="parent-component">
+    <child-component1 v-ref:cc1></child-component1>
+    <child-component2 v-ref:cc2></child-component2>
+    <button v-on:click="showChildComponentData()">显示子组件的数据</button>
+</template>
+
+<template id="child-component1">
+    <h2>This is child component1</h2>
+</template>
+
+<template id="child-component2">
+    <h2>This is child component2</h2>
+</template>
+
+<script src="js/vue.js"></script>
+<script>
+    Vue.component('parent-component', {
+        template: '#parent-component',
+        components: {
+            'child-component1': {
+                template: '#child-component1',
+                data: function(){
+                    return {
+                        msg: 'child component 1111'
+                    }
+                }
+            },
+            'child-component2': {
+                template: '#child-component2',
+                data: function(){
+                    return {
+                        msg: 'child component 22222'
+                    }
+                }
+            }
+        },
+        methods: {
+            showChildComponentData: function(){
+//                for( var i = 0; i < this.$children.length; i++ ){
+//                    console.log(this.$children[i].msg);
+//                }
+                console.log(this.$refs.cc1.msg);
+            }
+        }
+    });
+    new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>

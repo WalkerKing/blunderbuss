@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CA沙发换装系统-设计室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+    <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+    <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
+
+
+<script>
+    $(function(){
+//        定点的类
+        function Vertex( label ){   //  将所有的定点保存在数组中，在图类中可以通过它们在数组中的位置引用它
+            this.label = label;
+        }
+//        图的类
+        function Graph( v ){
+            this.vertices = v;
+            this.edges = 0;
+            this.adj = [];
+            this.addEdge = addEdge;
+            this.showGraph = showGraph;
+            this.dfs = dfs;
+            this.marked = [];
+            for( var i = 0; i < this.vertices; i++ ){
+                this.adj[i] = [];
+                this.adj[i].push('');
+                this.marked[i] = false;
+            }
+        }
+        function addEdge( v, w ){
+            this.adj[v].push( w );
+            this.adj[w].push( v );
+            this.edges++;
+        }
+        function showGraph(){
+            for( var i = 0; i < this.vertices; i++){
+                var showInfo = [];
+                showInfo.push( i + ' -->');
+                for( var j = 0; j < this.adj[i].length; j++ ){
+                    showInfo.push(this.adj[i][j] + '   ');
+                }
+                console.log( showInfo.join('') );
+            }
+        }
+        function dfs( v ){
+            this.marked[v] = true;
+            if( this.adj[v] !== undefined ){
+                console.log('visited' + v);
+            }
+            for( var w in this.adj[v] ){
+                if( !this.marked[w] ){
+                    this.dfs( w );
+                }
+            }
+        }
+        var g = new Graph( 10 );
+        g.addEdge( 0, 1 );
+        g.addEdge( 1, 2 );
+        g.addEdge( 2 ,4 );
+        g.showGraph();
+        g.dfs( 0 );
+
+    });
+
+</script>
+</body>
+</html>

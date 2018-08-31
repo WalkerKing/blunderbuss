@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2>命令模式-使用传统面向对象实现</h2>
+
+<dl>
+  <dt>命令模式的场景</dt>
+  <dd>
+    有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁，也不知道被请
+    求的操作是什么，此时希望用一种松耦合的方式来设计软件，使得请求发送者和请求接
+    收者能够消除彼此之间的耦合关系。
+  </dd>
+</dl>
+<button id="btn1" class="btn btn-info">刷新</button>
+<button id="btn2" class="btn btn-info">增加</button>
+<button id="btn3" class="btn btn-info">删除</button>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+$(function(){
+  var setCommand = function( btn, command ){
+    btn.onclick = function(){
+      command.excute();
+    }
+  };
+  var MenuBar = {
+    refresh: function(){
+      console.log('刷新页面！');
+    }
+  };
+  var SubMenu = {
+    add: function(){
+      console.log('增加子菜单！');
+    },
+    del: function(){
+      console.log('删除子菜单！');
+    }
+  };
+  var RefreshMenuBarCommand = function( receiver){
+    this.receiver = receiver;
+  };
+  RefreshMenuBarCommand.prototype.excute = function(){
+    this.receiver.refresh();
+  };
+  var AddSubMenuCommand = function( receiver){
+    this.receiver = receiver;
+  };
+  AddSubMenuCommand.prototype.excute = function(){
+    this.receiver.add();
+  };
+  var DelSubMenuCommand = function( receiver){
+    this.receiver = receiver;
+  };
+  DelSubMenuCommand.prototype.excute = function(){
+    this.receiver.del();
+  };
+  var refreshMenuBarCommand = new RefreshMenuBarCommand( MenuBar );
+  var addSubMenuCommand = new AddSubMenuCommand( SubMenu );
+  var delSubMenuCommand = new DelSubMenuCommand( SubMenu );
+  setCommand( btn1, refreshMenuBarCommand );
+  setCommand( btn2, addSubMenuCommand );
+  setCommand( btn3, delSubMenuCommand );
+});
+</script>
+</body>
+</html>

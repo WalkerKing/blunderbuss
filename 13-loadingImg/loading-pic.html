@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1>多幅png切换形成动画</h1>
+    <div id="animationDiv" class="center-block">
+        <img src="src/circle/circle.png_00000.png" alt="">
+    </div>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+$(function(){
+    var arr = [
+        'circle.png_00000',
+        'circle.png_00001',
+        'circle.png_00002',
+        'circle.png_00003',
+        'circle.png_00004',
+        'circle.png_00005',
+        'circle.png_00006',
+        'circle.png_00007',
+        'circle.png_00008',
+        'circle.png_00009',
+        'circle.png_00010',
+        'circle.png_00011',
+        'circle.png_00012',
+        'circle.png_00013',
+        'circle.png_00014',
+        'circle.png_00015',
+        'circle.png_00016',
+        'circle.png_00017',
+        'circle.png_00018',
+        'circle.png_00019',
+        'circle.png_00020',
+        'circle.png_00021',
+        'circle.png_00022',
+        'circle.png_00023',
+        'circle.png_00024',
+        'circle.png_00025',
+        'circle.png_00026',
+        'circle.png_00027',
+        'circle.png_00028',
+        'circle.png_00029',
+        'circle.png_00030',
+        'circle.png_00031',
+        'circle.png_00032',
+        'circle.png_00033',
+        'circle.png_00034',
+        'circle.png_00035',
+        'circle.png_00036',
+        'circle.png_00037',
+        'circle.png_00038',
+        'circle.png_00039',
+        'circle.png_00040',
+        'circle.png_00041',
+        'circle.png_00042',
+        'circle.png_00043',
+        'circle.png_00044',
+        'circle.png_00045',
+        'circle.png_00046',
+        'circle.png_00047',
+        'circle.png_00048',
+        'circle.png_00049',
+        'circle.png_00050',
+        'circle.png_00051',
+        'circle.png_00052',
+        'circle.png_00053',
+        'circle.png_00054',
+        'circle.png_00055',
+        'circle.png_00056',
+        'circle.png_00057',
+        'circle.png_00058',
+        'circle.png_00059',
+        'circle.png_00060',
+        'circle.png_00061',
+        'circle.png_00062',
+        'circle.png_00063',
+        'circle.png_00064',
+        'circle.png_00065',
+        'circle.png_00066',
+        'circle.png_00067',
+        'circle.png_00068',
+        'circle.png_00069',
+        'circle.png_00070',
+        'circle.png_00071',
+        'circle.png_00072',
+        'circle.png_00073',
+        'circle.png_00074',
+        'circle.png_00075',
+        'circle.png_00076',
+        'circle.png_00077',
+        'circle.png_00078',
+        'circle.png_00079',
+        'circle.png_00080',
+        'circle.png_00081',
+        'circle.png_00082',
+        'circle.png_00083',
+        'circle.png_00084',
+        'circle.png_00085',
+        'circle.png_00086',
+        'circle.png_00087',
+        'circle.png_00088',
+        'circle.png_00089',
+        'circle.png_00090',
+        'circle.png_00091',
+        'circle.png_00092',
+        'circle.png_00093',
+        'circle.png_00094',
+        'circle.png_00095',
+        'circle.png_00096',
+        'circle.png_00097',
+        'circle.png_00098',
+        'circle.png_00099',
+        'circle.png_00100',
+        'circle.png_00101',
+        'circle.png_00102',
+        'circle.png_00103',
+        'circle.png_00104',
+        'circle.png_00105',
+        'circle.png_00106',
+        'circle.png_00107',
+        'circle.png_00108',
+        'circle.png_00109',
+        'circle.png_00110',
+        'circle.png_00111',
+        'circle.png_00112',
+        'circle.png_00113',
+        'circle.png_00114',
+        'circle.png_00115',
+        'circle.png_00116',
+        'circle.png_00117',
+        'circle.png_00118',
+        'circle.png_00119',
+        'circle.png_00120',
+        'circle.png_00121',
+        'circle.png_00122',
+        'circle.png_00123',
+        'circle.png_00124',
+        'circle.png_00125',
+        'circle.png_00126',
+        'circle.png_00127',
+        'circle.png_00128',
+        'circle.png_00129',
+        'circle.png_00130',
+        'circle.png_00131',
+        'circle.png_00132',
+        'circle.png_00133',
+        'circle.png_00134',
+        'circle.png_00135',
+        'circle.png_00136',
+        'circle.png_00137',
+        'circle.png_00138',
+        'circle.png_00139',
+        'circle.png_00140',
+        'circle.png_00141',
+        'circle.png_00142',
+        'circle.png_00143',
+        'circle.png_00144',
+        'circle.png_00145',
+        'circle.png_00146',
+        'circle.png_00147',
+        'circle.png_00148',
+        'circle.png_00149',
+    ];
+    var i = 0, j = 1;
+    var timer = setInterval(function(){
+        i ++;
+        i = i%150;
+        i === 149 && j--;
+        $('#animationDiv').children('img').attr( 'src', 'src/circle/' + arr[i] + '.png' );
+        if( !j ){
+            clearInterval( timer );
+            timer = null;
+        }
+    },40);
+});
+</script>
+</body>
+</html>

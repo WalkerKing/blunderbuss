@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<ul class="panel-group" id="main2" role="tablist">
+	<li class="panel panel-default">
+		<h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_1" aria-expanded="true">
+			123
+		</h3>
+		<div id="main2_1" class="panel-collapse collapse in" role="tabpanel">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat consectetur numquam cumque voluptatibus ea debitis illum officiis! Mollitia corporis quos illo repudiandae et odio eligendi laboriosam aliquam nihil at. Quia!
+		</div>
+	</li>
+	<li class="panel panel-default">
+		<h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_2">
+			456
+		</h3>
+		<div id="main2_2" class="panel-collapse collapse" role="tabpanel">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque eius quibusdam accusamus iusto consectetur saepe totam omnis voluptates esse. Quis soluta voluptatem reprehenderit ipsam numquam dolorem nisi error saepe quam!
+		</div>
+	</li>
+</ul>
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+		<h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+			点击我进行展开，再次点击我进行折叠。第 1 部分
+		</h4>
+		<div id="collapseOne" class="panel-collapse collapse in">
+			Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+			cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+			vice lomo.
+		</div>
+    </div>
+    <div class="panel panel-default">
+		<h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
+			点击我进行展开，再次点击我进行折叠。第 2 部分
+		</h4>
+		<div id="collapseTwo" class="panel-collapse collapse">
+			Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+			cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+			vice lomo.
+		</div>
+    </div>
+</div>
+
+  <script src="../common/jquery-1.12.4.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+  <script>
+	var s = '<div class="panel-group" id="accordion1">'+
+	' <div class="panel panel-default">'+
+        '<div class="panel-heading">'+
+            '<h4 class="panel-title">'+
+                '<a data-toggle="collapse" data-parent="#accordion1" '+
+                'href="#collapseThree">'+
+                '点击我进行展开，再次点击我进行折叠。第 3 部分'+
+                '</a>'+
+            '</h4>'+
+        '</div>'+
+        '<div id="collapseThree" class="panel-collapse collapse">'+
+            '<div class="panel-body">'+
+                'Nihil anim keffiyeh helvetica, craft beer labore wes anderson '+
+                'cred nesciunt sapiente ea proident. Ad vegan excepteur butcher '+
+                'vice lomo.'+
+            '</div>'+
+        '</div>'+
+    '</div>'+
+	'</div>';
+	console.log(s);
+  </script>
+</body>
+</html>

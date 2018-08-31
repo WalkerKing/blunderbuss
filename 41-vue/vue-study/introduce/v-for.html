@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue v-for</title>
+</head>
+<body>
+<div id="app">
+    <h2 v-show="ok">显示副标题</h2>
+    <ul>
+        <li v-for="(info, index) in arr">
+            <template v-for="(subInfo, k) of info">
+                <ul>
+                    <li>
+                        {{msg}} - {{ index }} - {{ k | uppercase }} - {{ subInfo }}
+                        <hr>
+                    </li>
+
+                </ul>
+            </template>
+        </li>
+    </ul>
+</div>
+<div id="repeatObj">
+    <ul>
+        <li v-for="( item, key, idx ) in obj">
+            {{idx}}:{{key}}:{{item}}
+        </li>
+    </ul>
+</div>
+<script src="../js/vue.min.js"></script>
+<script>
+    Vue.filter('reverse', function (value) {
+        return value.split('').reverse().join('')
+    });
+    Vue.filter('uppercase', function (value) {
+        return value.toUpperCase();
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            ok: true,
+            msg: 'some messages',
+            arr: [
+                {txt: 123, name: 'a'},
+                {txt: 456, name: 'b'},
+                {txt: 789, name: 'c'},
+                {txt: 147, name: 'd'}
+            ]
+        }
+    });
+    new Vue({
+        el: '#repeatObj',
+        data: {
+            obj: {
+                'name': 'Jim',
+                'age': 21
+            }
+        }
+    });
+</script>
+</body>
+</html>

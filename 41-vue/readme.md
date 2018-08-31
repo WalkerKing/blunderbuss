@@ -1,0 +1,2 @@
+- {{* }}加星号在开发版本中不能用，在这里可以用http://static.runoob.com/assets/vue/1.0.11/vue.min.js， 待研究
+- 过滤器没有实验成功,待继续研究 v-for.html 已研究成功，所有过滤器需要重新用Vue.filter自定义170208

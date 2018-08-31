@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <h2>js中实现单例模式</h2>
+  <pre>
+    在js中实现单例模式的核心是，确保只生成一个对象，同时提供全局访问。
+    js的全局变量都可以作为单例使用，但是会造成全局污染（命名空间污染）
+  </pre>
+  <pre>
+    js中有两种方式解决这个问题：
+    1. 使用命名空间     //第一个示例是动态创建命名空间
+    2. 使用闭包       //第二个示例使用闭包保护私有变量
+  </pre>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+  var MyApp = {};
+  MyApp.nameSpace = function( name ){
+    var parts = name.split('.');  //  将带有.的名字打散
+    var current = MyApp;    //  用current保存对原来命名空间的引用
+    for( var i in parts ){
+      if( !current[ parts[i] ] ){   //  如果当前命名空间下该属性不存在，则创建，如果存在，直接将current保存这个属性的引用
+        current[ parts[ i ] ] = {};
+      }
+      current = current[ parts[ i ] ];
+    }
+  };
+  MyApp.nameSpace('dom.js.fun');
+  MyApp.nameSpace('dom.name');
+  MyApp.nameSpace('css');
+
+  console.log( MyApp );
+  var user = (function(){
+    var _name = 'tom',
+        _age = 29;
+    return {
+      getUserInfo: function(){
+        return _name+'_'+_age;
+      }
+    };
+  })();
+  console.log( user );
+</script>
+</body>
+</html>

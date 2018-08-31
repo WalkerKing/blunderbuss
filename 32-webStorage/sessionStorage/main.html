@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+    <script src="../../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+    <script src="../../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+    </style>
+</head>
+<body>
+<h3 style="margin-left: 50px;">首页</h3>
+<h4 style="margin-left: 50px;">用户操作当前页面并跳转至其他页面，再从其他页面调回本页面时，页面保持用户最后操作过的状态</h4>
+<hr>
+    <ul>
+        <li class="btn btn-default" data-idx="1">coocie</li>
+        <li class="btn btn-default" data-idx="2">sessionStorage</li>
+        <li class="btn btn-default" data-idx="3">localStorage</li>
+        <li class="btn btn-default" data-idx="4">indexDB'</li>
+        <li class="btn btn-default" data-idx="5">webSQL</li>
+    </ul>
+<br>
+    <a href="detail.html" class="btn btn-link">点击跳转至详情页</a>
+<script src="../../common/jquery-1.12.4.js"></script>
+<script src="../../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+    $(function(){
+        var idx = sessionStorage.getItem('idx');    //  获取sessionStorage中保存的信息
+        idx = !!idx ? idx : '1';    //  如果idx为空说明是第一次加载页面，默认设置第一个为激活状态
+        $('[data-idx="'+idx+'"]').addClass('btn-primary');
+        $('ul').on('click', 'li', function(){
+            $(this).addClass('btn-primary').siblings('.btn-primary').removeClass('btn-primary');
+            var idx = $(this).attr('data-idx');     //  在点击事件中获取data-idx属性值
+            sessionStorage.setItem('idx',idx);      //  存入sessionStorage
+        });
+    });
+</script>
+</body>
+</html>

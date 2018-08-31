@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户定制页面</title>
+    <link rel="shortcut icon" href="../src/img/logo_title.ico">
+    <!-- 设置 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 引入 Bootstrap 的 CSS 文件 -->
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <!--引入滚动条样式-->
+    <link rel="stylesheet" href="../css/jquery.rollbar.css">
+    <!-- 引入自定义样式文件 -->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="css/customSofa.css">
+</head>
+<body>
+<!--页顶导航-->
+<header>
+    <div class="header">
+        <!--左侧logo-->
+        <a href="chooseSofa.html" class="markorLogo"><img src="src/img/logo_03.png" title="Markor logo"></a>
+        <!--右侧用户信息-->
+        <ul>
+            <li>
+                <i title="收藏夹"></i>
+                <a href="colorTable.html">收藏夹</a>
+            </li>
+            <li>
+                <i title="定制表"></i>
+                <a href="#">定制表</a>
+            </li>
+            <li>
+                <a href="#">您好：<span>Markor</span></a>
+            </li>
+            <li>
+                <a href="enter.html">退出</a>
+            </li>
+        </ul>
+    </div>
+</header>
+<!--面包屑导航-->
+<nav>
+    <div class="blank">
+        <span>当前位置：</span>
+        <ol class="breadcrumb">
+            <li><a href="chooseSofa.html">首页</a></li>
+            <li class="active">定制</li>
+        </ol>
+    </div>
+</nav>
+<!--页面主体-沙发定制部分-->
+<section>
+    <div class="section">
+        <div class="showWindow">
+            <div id="u3d">
+                <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="616px" width="1274px"></canvas>
+            </div>
+        </div>
+        <div class="chooseWindow">
+            <!--用户选择窗口-->
+            <div class="totalPrice">
+                <h3>商品价格: <span>17899</span><span>元</span></h3>
+            </div>
+            <div class="chooseContainer">
+                <!--左侧图标列-->
+                <ul class="iconList">
+                    <li class="active" ><a href="#level1_1" title="主体1"></a></li>
+                    <li><a href="#level1_2" title="主体2"></a></li>
+                    <li><a href="#level1_3" title="主体3"></a></li>
+                    <li><a href="#level1_4" title="主体4"></a></li>
+                    <li><a href="#level1_5" title="主体5"></a></li>
+                    <li><a href="#level1_6" title="主体6"></a></li>
+                    <li><a href="#level1_7" title="主体7"></a></li>
+                </ul>
+                <div class="contentArea">
+                    <!--标题位置-->
+                    <h2>主体1</h2>
+                    <!--滚动条容器-->
+                    <div class="scrollContainer">
+                        <!--右侧二级选择区域-->
+                        <div class="contentList">
+                            <!--以下div为手风琴组件内容-->
+                            <div class="active " id="level1_1">
+                                <ul class="panel-group" id="main1" role="tablist">
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main1" data-target="#main1_1" aria-expanded="true">
+                                            面料
+                                        </h3>
+                                        <div id="main1_1" class="panel-collapse collapse in" role="tabpanel" data-mapid="2.1">
+                                            <div class="panel-body">
+                                                <!--面料三级选择内容-->
+                                                <div class="boolSelect">
+                                                    <span>是否确定选择</span>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-bool active">是</button>
+                                                        <button type="button" class="btn btn-bool">否</button>
+                                                    </div>
+                                                </div>
+                                                <div class="mainSelect">
+                                                    <ul>
+                                                        <li class="active">主体面料</li>
+                                                        <li>双面料</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="detailSelect">
+                                                    <!--一级-搜索区域-->
+                                                    <!--<div class="selectLevel1">-->
+                                                        <!--<div class="btn-group">-->
+                                                            <!--<button type="button" class="btn btn-search active">全部</button>-->
+                                                            <!--<button type="button" class="btn btn-search">收藏</button>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="searchBar">-->
+                                                            <!--<input type="text" placeholder="搜索">-->
+                                                            <!--<span class="searchBtn"></span>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                    <!--二级-筛选区域-->
+                                                    <!--<div class="selectLevel2">-->
+                                                        <!--<select name="filter1">-->
+                                                            <!--<option value="level">级别</option>-->
+                                                            <!--<option value="level">A级</option>-->
+                                                            <!--<option value="level">B级</option>-->
+                                                        <!--</select>-->
+                                                        <!--<select name="filter2">-->
+                                                            <!--<option value="level">级别</option>-->
+                                                            <!--<option value="level">A级</option>-->
+                                                            <!--<option value="level">B级</option>-->
+                                                        <!--</select>-->
+                                                        <!--<select name="filter3">-->
+                                                            <!--<option value="level">级别</option>-->
+                                                            <!--<option value="level">A级</option>-->
+                                                            <!--<option value="level">B级</option>-->
+                                                        <!--</select>-->
+                                                    <!--</div>-->
+                                                    <!--三级-展示区域-->
+                                                    <div class="selectLevel3">  <!--展示select下一层使用-->
+                                                        <ul>
+                                                            <li class="active"><img src="src/img/smallCloth_1.png" title="面料1"><i></i></li>
+                                                            <li><img src="src/img/smallCloth_2.png" title="面料2"><i></i></li>
+                                                            <li><img src="src/img/smallCloth_3.png" title="面料3"><i></i></li>
+                                                            <li><img src="src/img/smallCloth_4.png" title="面料4"><i></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="selectLevel4">  <!--展示group下一层使用-->
+                                                        <div>
+                                                            <span>DF1</span>
+                                                            <ul>
+                                                                <li class="active"><img src="src/img/smallCloth_1.png" title="面料1"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_2.png" title="面料2"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_3.png" title="面料3"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_4.png" title="面料4"><i></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div>
+                                                            <span>DF2</span>
+                                                            <ul>
+                                                                <li class="active"><img src="src/img/smallCloth_1.png" title="面料1"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_2.png" title="面料2"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_3.png" title="面料3"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_4.png" title="面料4"><i></i></li>
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main1" data-target="#main1_2">
+                                            内背面料
+                                        </h3>
+                                        <div id="main1_2" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                              <div class="detailSelect">
+                                                <div class="selectLevel3">
+                                                  <ul>
+                                                    <li class="active"><img src="src/img/smallCloth_1.png" title="面料1"><i></i></li>
+                                                    <li><img src="src/img/smallCloth_2.png" title="面料2"><i></i></li>
+                                                    <li><img src="src/img/smallCloth_3.png" title="面料3"><i></i></li>
+                                                    <li><img src="src/img/smallCloth_4.png" title="面料4"><i></i></li>
+                                                  </ul>
+                                                </div>
+                                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi deserunt dignissimos dolore ipsum laboriosam neque, possimus quia, quidem quis quo rem, rerum similique velit! Cumque et fugiat iusto quaerat quas.</div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main1" data-target="#main1_3">
+                                            嵌线
+                                        </h3>
+                                        <div id="main1_3" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main1" data-target="#main1_4">
+                                            配布纽扣
+                                        </h3>
+                                        <div id="main1_4" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main1" data-target="#main1_5">
+                                            扶手前抽
+                                        </h3>
+                                        <div id="main1_5" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main1" data-target="#main1_6">
+                                            坐垫
+                                        </h3>
+                                        <div id="main1_6" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main1" data-target="#main1_7">
+                                            靠垫装饰布
+                                        </h3>
+                                        <div id="main1_7" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="level1_2">
+                                <ul class="panel-group" id="main2" role="tablist">
+                                    <li class="panel panel-default active">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_1"  aria-expanded="true">
+                                            面料
+                                        </h3>
+                                        <div id="main2_1" class="panel-collapse collapse in" role="tabpanel">
+                                            <div class="panel-body">
+                                                <!--面料三级选择内容-->
+                                                <div class="clothMaterial">
+                                                    <div class="mainSelect">
+                                                        <ul>
+                                                            <li class="active">主体面料</li>
+                                                            <li>双面料</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="detailSelect">
+                                                        <!--一级-搜索区域-->
+                                                        <div class="selectLevel1">
+                                                            <div class="btn-group">
+                                                                <button request="all" type="button" class="btn btn-search active">全部</button>
+                                                                <button request="collection" type="button" class="btn btn-search">收藏</button>
+                                                            </div>
+                                                            <div class="searchBar">
+                                                                <input type="text" placeholder="搜索">
+                                                                <span class="searchBtn"></span>
+                                                            </div>
+                                                        </div>
+                                                        <!--二级-筛选区域-->
+                                                        <div class="selectLevel2">
+                                                            <select name="filter1" id="filter1">
+                                                                <option value="level">级别</option>
+                                                                <option value="level">A级</option>
+                                                                <option value="level">B级</option>
+                                                            </select>
+                                                            <select name="filter2" id="filter2">
+                                                                <option value="level">级别</option>
+                                                                <option value="level">A级</option>
+                                                                <option value="level">B级</option>
+                                                            </select>
+                                                            <select name="filter3" id="filter3">
+                                                                <option value="level">级别</option>
+                                                                <option value="level">A级</option>
+                                                                <option value="level">B级</option>
+                                                            </select>
+                                                        </div>
+                                                        <!--三级-展示区域-->
+                                                        <div class="selectLevel3">
+                                                            <ul>
+                                                                <li><img src="src/img/smallCloth_1.png" title="面料1"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_2.png" title="面料2"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_3.png" title="面料3"><i></i></li>
+                                                                <li><img src="src/img/smallCloth_4.png" title="面料4"><i></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_2">
+                                            内背面料
+                                        </h3>
+                                        <div id="main2_2" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                <div style="height:200px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi deserunt dignissimos dolore ipsum laboriosam neque, possimus quia, quidem quis quo rem, rerum similique velit! Cumque et fugiat iusto quaerat quas.</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_3">
+                                            嵌线
+                                        </h3>
+                                        <div id="main2_3" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_4">
+                                            配布纽扣
+                                        </h3>
+                                        <div id="main2_4" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_5">
+                                            扶手前抽
+                                        </h3>
+                                        <div id="main2_5" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_6">
+                                            坐垫
+                                        </h3>
+                                        <div id="main2_6" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="panel panel-default">
+                                        <h3 class="panel-title" data-toggle="collapse" data-parent="#main2" data-target="#main2_7">
+                                            靠垫装饰布
+                                        </h3>
+                                        <div id="main2_7" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="level1_3">主体3</div>
+                            <div id="level1_4">主体4</div>
+                            <div id="level1_5">主体5</div>
+                            <div id="level1_6">主体6</div>
+                            <div id="level1_7">主体7</div>
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <button id="addCustomListBtn" class="btn btn-markor" type="button">添加定制列表</button>
+                        <button id="openCustomListBtn" class="btn btn-markor" type="button">打开定制列表</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hotList unselect">
+            <!--爆款推荐列表-->
+            <b class="backward"></b>
+            <ul class="picSelect">
+                <li data-pid="1"><span><img src="src/img/smallPic_03.png" ></span></li>
+                <li data-pid="2"><span><img src="src/img/smallPic_06.png" ></span></li>
+                <li data-pid="3"><span><img src="src/img/smallPic_08.png" ></span></li>
+                <li data-pid="4"><span><img src="src/img/smallPic_11.png" ></span></li>
+                <li data-pid="5"><span><img src="src/img/smallPic_09.png" ></span></li>
+                <li data-pid="2"><span><img src="src/img/smallPic_06.png" ></span></li>
+                <li data-pid="3"><span><img src="src/img/smallPic_08.png" ></span></li>
+                <li data-pid="4"><span><img src="src/img/smallPic_11.png" ></span></li>
+            </ul>
+            <b class="forward"></b>
+        </div>
+    </div>
+</section>
+
+<script src="../js/jquery-1.12.4.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/jquery.mousewheel.js"></script>
+<script src="../js/jquery.rollbar.min.js"></script>
+<script src="../js/pmsg.js"></script>
+<script src="js/customSofa.js"></script>
+
+</body>
+</html>

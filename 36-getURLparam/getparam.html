@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+  $.getRequest = function() {
+    var url = location.search; //获取url中"?"符后的字串
+    var theRequest = {};
+    if (url.indexOf("?") != -1) {
+      var str = url.substr(1).split("&");
+      for(var i = 0; i < str.length; i ++) {
+        theRequest[str[i].split("=")[0]]=decodeURIComponent(str[i].split("=")[1]);
+      }
+    }
+    return theRequest;
+  };
+  console.log( $.getRequest() );
+</script>
+</body>
+</html>

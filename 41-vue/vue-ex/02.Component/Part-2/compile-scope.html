@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的编译作用域</title>
+</head>
+<body>
+    <h2>这段代码有错误，待study原因！</h2>
+    <div id="app">
+        <my-component v-show="display"></my-component>
+    </div>
+
+<template id="myComponent">
+    <p>{{ msg }}</p>
+    <button v-on:click="showMsg">Show Message</button>
+</template>
+
+
+<script src="js/vue.js"></script>
+<script>
+    Vue.component('my-component', {
+        template: '#myComponent',
+        data: function(){
+            return {
+                msg: 'This is a component!',
+                display: false
+            }
+        },
+        methods: {
+            showMsg: function(){
+                console.log( this.msg );
+            }
+        }
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            display: false
+        }
+    });
+</script>
+
+</body>
+</html>

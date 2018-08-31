@@ -1,0 +1,29 @@
+1. Section中type编号所对应的文件类型信息
+    const BASE_INFO = 1;
+    const MAX_FILE = 2;
+    const FBX_FILE = 3;
+    const PREVIEW = 4;
+    const TRANSFORM = 5;
+    const MAPS = 6;
+    const MAPS_OBJECT = 7;
+    const GROUP = 8;
+    const SELECT = 9;
+    const BOOL = 10;
+    const MONEY = 11;
+    const COLOR = 12;
+    const COLOR_OBJECT = 13;
+
+    BASE_INFO => '基本信息',
+    MAX_FILE => '3dmax文件',
+    FBX_FILE => 'fbx文件',
+    PREVIEW => '预览图',
+    TRANSFORM => '物体的三维空间位置',
+    MAPS => '贴图',
+    MAPS_OBJECT => '贴图对象',
+    GROUP => 'bom分组类型',
+    SELECT => 'bom多项选择类型',
+    BOOL => 'bom可选择项类型',
+    MONEY => '价格贡献',
+    COLOR => '颜色值',
+    COLOR_OBJECT => '颜色对象',
+

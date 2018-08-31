@@ -1,0 +1,388 @@
+body {
+    background-color:#fff;
+}
+body.hideRollbar {
+    overflow: hidden;
+    padding-right: 17px;
+}
+header {
+    background-color: #ededed;
+}
+.section {
+    width:1800px;
+    margin:0 auto;
+}
+.showWindow {
+    width:1274px;
+    float:left;
+    position:relative;
+    border: 1px dotted #aaa;
+}
+#u3d {
+    height:616px;
+    background: #aaa;
+
+    overflow:hidden;
+    position: relative;
+}
+#u3d>h3 {
+    width: 500px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -100px;
+}
+.chooseWindow {
+    float:left;
+    width:526px; height:616px;
+}
+.hotList {
+    float: left;
+    width:1800px;
+    height: 288px;
+    margin:0 auto;
+    padding:34px 0 32px;
+    position: relative;
+    overflow: hidden;
+}
+.hotList>b{
+    position: absolute;
+    z-index: 200;
+    width:100px; height:222px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.backward {
+    float: left;
+    left: 0;
+    background: url(../src/img/bigLeftArrow.png) no-repeat center center;
+}
+.forward {
+    float: right;
+    right: 0;
+    background: url(../src/img/bigRightArrow.png) no-repeat center center;
+}
+.disabled {
+    background: #fff;
+}
+.picSelect {
+    float: left;
+    height:222px;
+    position: absolute;
+    left: 100px;
+}
+.picSelect>li {
+    width:280px; height:222px;
+    float: left;
+    margin-left: 20px; margin-right: 20px;
+    cursor: pointer;
+}
+/*阻止元素被选中*/
+.unselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.totalPrice{
+    display:flex;
+    justify-content: center;
+    margin-right:18px;
+    border-top: 1px solid #c4c4c4;
+    border-bottom: 1px solid #c4c4c4;
+}
+.totalPrice>h3 {
+    font-weight:bold;
+    color:#000;
+    margin-top:10px;
+}
+.totalPrice>h3>span {
+    color:#f65a24;
+}
+/*主选项iconList样式*/
+.iconList {
+    display:flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    width:40px;
+    float:left;
+    background-color: #eaeaea;
+    padding-bottom:22px;
+    border-right:1px solid #c4c4c4;
+}
+.iconList>li {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:40px; height: 54px;
+    cursor:pointer;
+}
+.iconList>li.active {
+    background-color:#fff;
+    position: relative;
+    left: 1px;
+    border-right:1px solid #fff;
+}
+.iconList>li.active:first-child {
+    border-bottom: 1px solid #c4c4c4;
+}
+.iconList>li>a {
+    width:40px; height:40px;
+    background: url(../src/img/customize_14.png) no-repeat -32px -32px;
+}
+/*iconList样式完毕*/
+
+.contentArea {
+    margin-left:40px;
+}
+.contentArea>h2 {
+    font-size:16px;
+    font-weight:bold;
+    height:54px;
+    line-height:54px;
+    margin:0 18px 0 0;
+    padding-left:34px;
+    border-bottom:1px solid #c4c4c4;
+}
+
+.scrollContainer {
+    height:446px;
+}
+.contentList {
+    margin-top: 12px;
+    margin-left: 12px;
+    width: 456px;
+}
+.contentList>div {
+    display:none;
+}
+.contentList>div.active {
+    display: block;
+}
+/*滚动条样式重写*/
+.rollbar-path-vertical {
+    width: 8px;
+    border-radius: 4px;
+    background-color: #ddd;
+    margin-left: 4px;
+}
+.rollbar-handle {
+    height:80%;
+    background-color: #909090;
+}
+/*手风琴样式*/
+.panel-group .panel + .panel {
+    margin-top: 9px;
+}
+.panel-group .panel {
+    border: none;
+}
+.panel-group>li>h3[aria-expanded="true"] {  /* synchronous with the animation */
+    background-color: #333;
+    color:#fff;
+    border-color: #bfbfbf;
+    background-image: url(../src/img/upArrow.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+.panel-title {
+    height: 54px;
+    line-height: 54px;
+    padding-left:18px;
+    font-size:14px;
+    cursor:pointer;
+    border:1px solid #bfbfbf;
+    background:url(../src/img/downArrow.png) no-repeat right center;
+}
+.panel-title:hover {
+    border-color: #48b090;
+    background:url(../src/img/downArrowGreen.png) no-repeat right center;
+}
+/**********手风琴样式完毕***********/
+/*btn-markor按钮*/
+div.contentArea>div.btns {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-left: 28px;
+}
+.btn-markor {
+    width:120px; height: 34px;
+    margin-right: 7px;
+    background-color: #e05a28;
+    color:#fff;
+}
+.btn-markor:hover,
+.btn-markor:focus,
+.btn-markor.focus
+{
+    color: #fff;
+}
+.panel-body {
+    padding: 9px 12px 1px 12px;
+}
+/************主体选区***********/
+
+.mainSelect>ul {
+    border: 1px solid #999;
+}
+.mainSelect>ul>li {
+    height: 54px;
+    text-align:center;
+    line-height:54px;
+    font-size: 16px;
+    border-bottom: 1px solid #999;
+    cursor: pointer;
+}
+.mainSelect>ul>li:last-child {
+    border-bottom: none;
+}
+/*.mainSelect>ul>li:hover ,*/
+.mainSelect>ul>li.active
+{
+    background-color: #525252;
+    color: #fff;
+}
+/***************主体选取结束**************/
+/***************细项选区*****************/
+
+.detailSelect {
+    margin-top: 30px;
+}
+.boolSelect {
+    height: 54px;
+    line-height: 54px;
+    border: 1px solid #999;
+    border-bottom: none;
+}
+.boolSelect>span {
+    margin-left: 34px;
+    color: #c4c2c2;
+}
+.boolSelect>.btn-group {
+    float: right;
+    margin-right: 34px;
+    margin-top: 14px;
+}
+.btn-bool {
+    width: 52px; height: 26px;
+    border: 1px solid #aaa;
+    background-color: #fff;
+}
+.btn-search {
+    width: 114px; height: 32px;
+    border: 1px solid #aaa;
+    background-color: #fff;
+}
+.btn-search:hover,
+.btn-search:focus,
+.btn-search.active,
+.btn-bool.active
+{
+    color: #fff;
+    background-color: #909090;
+}
+.selectLevel1 {
+    display: flex;
+    justify-content: space-between;
+}
+.selectLevel1>.searchBar {
+    position:relative;
+}
+.selectLevel1>.searchBar>input {
+    width: 194px; height: 32px;
+    padding-left: 45px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.selectLevel1>.searchBar>.searchBtn {
+    position:absolute;
+    width:24px; height:22px;
+    cursor:pointer;
+    background:url(../src/img/icon_01.png) no-repeat -40px -40px;
+    top:5px; left:12px;
+}
+.selectLevel1>.searchBar>ul {
+    background-color: rgba(255,255,255,.6);
+    position: absolute;
+    top: 34px; left: 44px;
+}
+.selectLevel1>.searchBar>ul>li {
+    cursor: pointer;
+}
+.selectLevel2 {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.selectLevel2>select {
+    width: 130px; height: 40px;
+    padding: 0 14px 0 22px;
+    appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    -o-appearance:none;
+    -webkit-appearance:none;
+    background: url(../src/img/solidDownArrow.png) no-repeat 56px -30px;
+    border: 1px solid #a9a9a9; /* firefox compatible */
+}
+.selectLevel3 {
+    margin-top: 10px;
+}
+.selectLevel3>ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.selectLevel3>ul>li {
+    width: 102px; height: 67px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+.selectLevel3>ul>li.active>i {
+    display: inline-block;
+    position: absolute;
+    width: 41px; height: 37px;
+    top: 15px; left: 30px;
+    background: url(../src/img/selected.png) no-repeat 0 0;
+}
+.selectLevel4 {
+    margin-top: 10px;
+}
+.selectLevel4>div {
+    margin-bottom: 10px;
+}
+.selectLevel4>div>span {
+    display: inline-block;
+    width: 100%;
+    height: 24px; line-height: 24px;
+    border-top: 2px dotted #aaa;
+}
+.selectLevel4>div>ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.selectLevel4>div>ul>li {
+    width: 102px; height: 67px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+.selectLevel4>div>ul>li.active>i {
+    display: inline-block;
+    position: absolute;
+    width: 41px; height: 37px;
+    top: 15px; left: 30px;
+    background: url(../src/img/selected.png) no-repeat 0 0;
+}
+/************细项选区结束****************/
+
+

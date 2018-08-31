@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table-curd</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <label>search</label>
+        <input type="text" class="search-input" v-model="searchQuery">
+    </div>
+    <div class="container">
+        <simple-grid :data-list="people" :columns="columns" :search-key="searchQuery">
+
+        </simple-grid>
+    </div>
+</div>
+
+<template id="grid-template">
+    <table>
+        <thead>
+            <tr>
+                <th v-for="col in columns">
+                    {{ col.name | capitalize }}
+                </th>
+                <th>
+                    delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(index, entry) in dataList | filterBy searchKey">
+                <td v-for="col in columns">
+                    <span v-if="col.isKey">
+                        <a href="javascript:void(0)" @click="openEditItemDialog(entry[col.name])">{{entry[col.name]}}</a>
+                    </span>
+                    <span v-else>{{entry[col.name]}}</span>
+                </td>
+                <td class="text-center">
+                    <button class="btn-danger" @click="deleteItem(index)">delete</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="container">
+        <button @click="openNewItemDialog('Create New Item')">Create</button>
+    </div>
+    <modal-dialog :mode="mode" :fields="columns" :title="title" :item="item" v-on:create-item="createItem" v-on:update-item="updateItem"></modal-dialog>
+
+</template>
+
+<template id="dialog-template">
+    <div class="dialogs">
+        <div class="dialog" :class="{ 'dialog-active': show }">
+            <div class="dialog-content">
+                <header class="dialog-header">
+                    <h1 class="dialog-title">{{ title }}</h1>
+                </header>
+                <div class="dialog-body">
+                    <div v-for="field in fields" class="form-group">
+                        <label>{{ field.name }}</label>
+                        <select v-if="field.dataSource" v-model="item[field.name]" :disabled="mode===2 && field.isKey">
+                            <option v-for="opt in field.dataSource" :value="opt" >{{ opt }}</option>
+                        </select>
+                        <input v-else="field.dataSource" v-model="item[field.name]" :disabled="mode===2 && field.isKey">
+                    </div>
+                </div>
+
+                <footer class="dialog-footer">
+                    <div class="form-group">
+                        <label></label>
+                        <button v-on:click="save">Save</button>
+                        <button v-on:click="close">Close</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div class="dialog-overlay"></div>
+    </div>
+</template>
+
+<script src="js/vue.js"></script>
+<script>
+    Vue.component( 'simple-grid', {
+        template: '#grid-template',
+        props: [ 'dataList', 'columns', 'searchKey' ],
+        data: function(){
+            return {
+                mode: 0,
+                item: {},
+                keyColumn: '',
+                title: ''
+            }
+        },
+        ready: function(){
+            for( var i = 0; i < this.columns.length; i++ ){
+                if( this.columns[i].isKey ){
+                    this.keyColumn = this.columns[i].name;
+                    break;
+                }
+            }
+        },
+        methods: {
+            openEditItemDialog: function( key ){
+                var currentItem = this.findItemByKey(key);
+                this.title = 'Edit Item - ' + key;
+                this.item = {};
+                this.item = this.initItemForUpdate(currentItem)
+                this.mode = 2;
+                this.$broadcast('showDialog', true);
+
+            },
+            initItemForUpdate: function(p) {
+                var c = c || {};
+                for(var i in p) {
+                    // 属性i是否为p对象的自有属性
+                    if(p.hasOwnProperty(i)) {
+                        if(typeof p[i] === 'object') {
+                            c[i] = Array.isArray(p[i]) ? [] : {}
+                            deepCopy(p[i], c[i])
+                        } else {
+                            // 属性是基础类型时，直接拷贝
+                            c[i] = p[i]
+                        }
+                    }
+                }
+                return c;
+            },
+            findItemByKey: function( key ){
+                var keyColumn = this.keyColumn;
+                for( var i in this.dataList ){
+                    if( this.dataList[i][keyColumn] === key ){
+                        return this.dataList[i];
+                    }
+                }
+            },
+            createItem: function(){
+                this.dataList.push( this.item );
+                this.$broadcast('showDialog', false);
+                this.item = {};
+            },
+            updateItem: function(){
+                var keyColumn = this.keyColumn;
+                for( var i = 0; i < this.dataList.length; i++ ){
+                    if( this.dataList[i][keyColumn] === this.item[keyColumn] ){
+                        this.dataList.$set(i,this.item);
+                        break;
+                    }
+                }
+                // 广播事件，传入参数false表示隐藏对话框
+                this.$broadcast('showDialog', false)
+                // 修改完数据后，重置item对象
+                this.item = {}
+
+            },
+            deleteItem: function( index ){
+                this.dataList.splice( index, 1 );
+            },
+            openNewItemDialog: function( title ){
+                this.title = title;
+                this.mode = 1;  //  1表示新建模式
+                this.item = {};
+                this.$broadcast('showDialog', true);
+            }
+        },
+        components: {
+            'modal-dialog': {
+                template: '#dialog-template',
+                data: function(){
+                    return {
+                        show: false
+                    }
+                },
+                props: ['mode', 'title', 'fields', 'item'],
+                methods: {
+                    close: function(){
+                        this.show = false;
+                    },
+                    save: function(){
+                        if( this.mode === 1 ){
+                            this.$dispatch('create-item');
+                        }else if( this.mode === 2 ){
+                            this.$dispatch('update-item');
+                        }
+                    }
+                },
+                events: {
+                    'showDialog': function( show ){
+                        this.show = show;
+                    }
+                }
+            }
+        }
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            searchQuery: '',
+            columns: [{
+                name: 'name',
+                isKey: true
+            }, {
+                name: 'age'
+            }, {
+                name: 'sex',
+                dataSource: ['Male', 'Female']
+            }],
+            people: [{
+                name: 'Jack',
+                age: 30,
+                sex: 'Male'
+            }, {
+                name: 'Bill',
+                age: 26,
+                sex: 'Male'
+            }, {
+                name: 'Tracy',
+                age: 22,
+                sex: 'Female'
+            }, {
+                name: 'Chris',
+                age: 36,
+                sex: 'Male'
+            }]
+        }
+    });
+</script>
+</body>
+</html>

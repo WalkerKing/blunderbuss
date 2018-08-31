@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理器</title>
+</head>
+<body>
+
+<div id="example-1">
+    <h2>事件监听</h2>
+    <button v-on:click="counter++">增加1</button>
+    <p>这个按钮被点击{{counter}}次</p>
+</div>
+<div id="example-2">
+    <h2>方法事件处理器</h2>
+    <button v-on:click="greet">say hi!</button>
+    <p>点击按钮后，请查看控制台</p>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            counter: 0
+        }
+    });
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            'name': 'vue.js'
+        },
+        methods: {
+            greet: function( e ){
+                console.log('Hello ' + this.name + '!');
+                console.log( e.target );
+            }
+        }
+    });
+</script>
+</body>
+</html>

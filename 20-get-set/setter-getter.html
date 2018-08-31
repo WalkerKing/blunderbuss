@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟数据双向绑定</title>
+</head>
+<body>
+
+ES5的getter与setter
+在ES5中新增了一个Object.defineProperty，直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。
+Object.defineProperty(obj, prop, descriptor)
+其接受的第三个参数可以取get和set并各自对应一个getter和setter方法：
+
+<span>123</span>
+
+
+<script>
+    window.onload = function(){
+        var a = { zhihu: 0 },
+            b = { name: 'tom' };
+
+        Object.defineProperty(a, 'zhihu', {
+            get: function() {
+                console.log('get：' + zhihu);
+                return zhihu;
+            },
+            set: function(value) {
+                zhihu = value;
+                console.log('set:' + zhihu);
+            }
+        });
+        Object.defineProperty( b, 'age', {
+            value: 12,
+            writable: false,
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty( b, 'age', {
+            writable: true
+        });
+        b.age = 14;
+        Object.defineProperty( b, 'age', {
+            writable: false
+        });
+        console.log(Object.getOwnPropertyDescriptor( b, "name" )); // get：2
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+</head>
+<body>
+    <h1>实现对象克隆的几种方式</h1>
+    <h3>共使用三种方式</h3>
+    <ul>
+        <li>clone-浅克隆-只克隆了一层对象</li>
+        <li>deepClone-深度克隆，采用递归方式进行克隆</li>
+        <li>deepCloneUseJson-深度克隆，使用JSON转换方式实现对象克隆</li>
+    </ul>
+    <a href="../index.html">返回首页</a>
+<script type="text/javascript">
+	var a = {
+        create:[
+        {"partId":"1","fbxPath":"http://101.201.210.175/guiqian/20160918/","fbxName":"baozhen01.FBX","positionRelative":"","position":{"x":0.0,"y":0.1720000058412552,"z":0.14800000190734864},"rotation":{"x":-90.0,"y":180.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0},"ModelMaterial":{"partId":"","material":{"materialName":"","shader":{"shaderName":"","color_main":{"r":0.6078431606292725,"g":0.6078431606292725,"b":0.6078431606292725,"a":1.0},"color_specular":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"texture":{"mainTex":"","normalTex":""},"tiling":{"x":1.0,"y":1.0},"offset":{"x":0.0,"y":0.0}}}}},
+        {"partId":"2","fbxPath":"http://101.201.210.175/guiqian/20160918/","fbxName":"baozhen02.FBX","positionRelative":"","position":{"x":0.0,"y":0.17800000309944154,"z":0.041999999433755878},"rotation":{"x":-90.0,"y":180.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0},"ModelMaterial":{"partId":"","material":{"materialName":"","shader":{"shaderName":"","color_main":{"r":0.6078431606292725,"g":0.6078431606292725,"b":0.6078431606292725,"a":1.0},"color_specular":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"texture":{"mainTex":"","normalTex":""},"tiling":{"x":1.0,"y":1.0},"offset":{"x":0.0,"y":0.0}}}}}
+        ],
+        material:[
+        {"partId":"1","material":{"materialName":"","shader":{"shaderName":"Standard (Specular setup)","color_main":{"r":0.6078431606292725,"g":0.6078431606292725,"b":0.6078431606292725,"a":1.0},"color_specular":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"texture":{"mainTex":"http://101.201.210.175/guiqian/20160918/baozhen02.jpg","normalTex":"","specularTex":""},"tiling":{"x":1.0,"y":1.0},"offset":{"x":0.0,"y":0.0}}}}
+        ,
+        {"partId":"2","material":{"materialName":"","shader":{"shaderName":"Standard (Specular setup)","color_main":{"r":0.6078431606292725,"g":0.6078431606292725,"b":0.6078431606292725,"a":1.0},"color_specular":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"texture":{"mainTex":"http://101.201.210.175/guiqian/20160918/baozhen01.jpg","normalTex":"","specularTex":""},"tiling":{"x":1.0,"y":1.0},"offset":{"x":0.0,"y":0.0}}}}
+        ],
+        scene:[
+        {"sceneId":"EasyScene"}
+	]
+    };
+    /*浅克隆，只克隆了一层对象*/
+    function clone(obj){
+        var result = {};
+        for(var k in obj){
+            result[k] = obj[k];
+        }
+        return result;
+    }
+
+    /*深克隆*/
+    function deepClone(obj){
+        var result=null;
+        switch (Object.prototype.toString.call(obj).slice(8,-1))
+        {
+        case 'Object':
+            result = {};
+            copy(obj)
+            break;
+        case 'Array':
+            result = [];
+            copy(obj)
+            break;
+        default:
+            return obj;
+        }
+        function copy(obj){
+            for(var key in obj){
+                result[key] = deepClone(obj[key]);
+            }
+        }
+        return result;
+    }
+    function deepCloneUseJson( obj ){
+        return JSON.parse( JSON.stringify( obj ) );
+    }
+    var b = deepCloneUseJson(a);
+    b.material = 1;
+    console.log(a);
+    console.log(b);
+</script>
+</body>
+</html>

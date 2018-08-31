@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>组合模式</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <h1>组合模式</h1>
+  <ul>
+    <li>普通组合模式的实现-combine1</li>
+    <li>案例：扫描文件夹,实现深度优先的遍历-combine2</li>
+  </ul>
+  <hr>
+  <button id="btn" class="btn btn-info btn-lg">点击体验组合模式</button>
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+
+  $(function(){
+    var combine1 = function(){
+      var MacroCommand = function(){
+        return {
+          commandList: [],
+          add: function( command ){
+            this.commandList.push( command );
+          },
+          execute: function(){
+            for( var i = 0, command; command = this.commandList[ i++ ]; ){
+              command.execute();
+            }
+          }
+        }
+      };
+      var openAcCommand = {
+        execute: function(){
+          console.log('打开空调');
+        }
+      };
+      var openTvCommand = {
+        execute: function(){
+          console.log('打开电视');
+        }
+      };
+      //  定义一个宏命令，包含打开电视和空调的命令
+      var macroCommand1 = new MacroCommand();
+      macroCommand1.add( openTvCommand);
+      macroCommand1.add( openAcCommand);
+      var closeDoorCommand = {
+        execute: function(){
+          console.log('关门');
+        }
+      };
+      var openPcCommand = {
+        execute: function(){
+          console.log('打开电脑');
+        }
+      };
+      var openQQCommand = {
+        execute: function(){
+          console.log('登录QQ');
+        }
+      };
+      var macroCommand2 = new MacroCommand();
+      macroCommand2.add( closeDoorCommand );
+      macroCommand2.add( openPcCommand );
+      macroCommand2.add( openQQCommand );
+      var macroCommand = new MacroCommand();
+      macroCommand.add( macroCommand1 );
+      macroCommand.add( macroCommand2 );
+      btn.onclick = function(){
+        macroCommand.execute();
+      };
+    };
+    var combine2 = function(){
+      var Folder = function( name ){
+        this.name = name;
+        this.files = [];
+      };
+      Folder.prototype.add = function( file ){
+        this.files.push( file );
+      };
+      Folder.prototype.scan = function(){
+        console.log( '开始扫描文件夹：' + this.name );
+        for( var i = 0, file; file = this.files[ i++ ]; ){
+          file.scan();
+        }
+      };
+      var File = function( name ){
+        this.name = name;
+      };
+      File.prototype.add = function(){
+        throw new Error('文件不允许添加子文件！');
+      };
+      File.prototype.scan = function(){
+        console.log( '正在扫描文件：' + this.name );
+      };
+      /********************创建文件系统*******************/
+      var folder = new Folder('F：');
+      var folder1 = new Folder('sw');
+      var folder2 = new Folder('study');
+      var file1 = new File('QQ.exe');
+      var file2 = new File('360.exe');
+      var file3 = new File('js帮助文档');
+      var file4 = new File('jquery手册');
+      folder.add( folder1 );
+      folder.add( folder2 );
+      folder.add( file4 );
+      folder1.add( file1 );
+      folder1.add( file2 );
+      folder2.add( file3 );
+      folder.scan();
+    };
+    combine2();
+
+  });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>proxy model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+    <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+    <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <h2>代理模式</h2>
+    <ul>
+        <li>小明送花-sendFlower</li>
+        <li>图片预加载-preLoading</li>
+        <li>虚拟代理合并http请求-文件同步-mergeRequests</li>
+    </ul>
+
+    <div id="checkboxs">
+        <input type="checkbox" id="1">
+        <input type="checkbox" id="2">
+        <input type="checkbox" id="3">
+        <input type="checkbox" id="4">
+        <input type="checkbox" id="5">
+        <input type="checkbox" id="6">
+        <input type="checkbox" id="7">
+        <input type="checkbox" id="8">
+        <input type="checkbox" id="9">
+        <input type="checkbox" id="10">
+        <input type="checkbox" id="11">
+        <input type="checkbox" id="12">
+        <input type="checkbox" id="13">
+    </div>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+    var sendFlower = function(){
+        var Flower = function(){} ;
+        var xiaoming = {
+            sendFlower: function( target ){
+                var flower = new Flower();
+                target.receive( flower );
+            }
+        };
+        var A = {
+            receive: function( flower ){
+                console.log( '收到花',flower );
+            },
+            listenGoodMood: function( fn ){
+                setTimeout(function(){
+                    fn();
+                },5000);
+            }
+        };
+        var B = {
+            receive: function( flower ){
+                A.listenGoodMood(function(){
+                    A.receive( flower );
+                });
+
+            }
+        };
+        xiaoming.sendFlower( B );
+    };
+
+    var preLoading = function(){
+        var myImg = (function(){
+            var imgNode = new Image();
+            document.body.appendChild( imgNode );
+            return {
+                setSrc: function(src){
+                    imgNode.src = src;
+                }
+            };
+        })();
+
+        var proxyImg = (function(){
+            var img = new Image();
+            img.onload = function(){
+                myImg.setSrc( this.src );
+            };
+            return {
+                setSrc: function( src ){
+                    myImg.setSrc( '../33-Ztree/zTree_v3-master/css/awesomeStyle/img/loading.gif' );
+                    img.src = src;
+                }
+            };
+        })();
+        proxyImg.setSrc('http://n1.itc.cn/img8/wb/smccloud/fetch/2015/05/07/180641312537237624.JPEG');
+    };
+
+    var mergeRequests = function(){
+        var synchronousFile = function( id ){
+            console.log('开始同步文件' + id);
+        };
+        var proxySynchronousFile = (function(){
+            var cache = [], timer;
+            return function( id ){
+                cache.push( id );
+                if( timer ){ return ; }
+                timer = setTimeout(function(){
+                    synchronousFile( cache.join(',') );
+                    clearTimeout( timer );
+                    timer = null;
+                    cache.length = 0;   //  清空id集合
+                }, 2000);
+            };
+        })();
+        var checkbox = document.getElementsByTagName( 'input' );
+        for( var i = 0, c; c = checkbox[ i++ ]; ){
+            c.onclick = function(){
+                if( this.checked === true ){
+                    proxySynchronousFile( this.id );
+                }
+            }
+        }
+    };
+    mergeRequests();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数作为返回值输出</title>
+</head>
+<body>
+
+<script>
+//    判断一个变量的类型
+    var isString = function(obj){
+        return Object.prototype.toString.call(obj) === '[object String]';
+    };
+    var Type = {};
+    for(var i = 0, type; type = ['String', 'Array', 'Object', 'Number', 'Function'][ i++ ]; ){
+        (function(type){
+            Type['is'+type] = function(obj){
+                console.log(type);
+                return Object.prototype.toString.call(obj) === '[object '+type+']';
+
+            }
+        })(type);
+    }
+console.log(Type.isString(''));
+//    实现单例模式
+    debugger;
+    var getSingle = function ( fn ){
+        var ret;    //  声明一个标志位
+        return function(){
+            return ret || (ret = fn.apply(this,arguments));     //  如果该标志位是undefined，则执行传入的方法，否则直接return，从而实现单例
+        };
+    };
+    var getScript = getSingle(function(){     //    使用单例模式创建一个script标签
+        return document.createElement('script');
+    });
+    var script1 = getScript();
+    var script2 = getScript();
+    console.log(script1 === script2);
+</script>
+
+</body>
+</html>

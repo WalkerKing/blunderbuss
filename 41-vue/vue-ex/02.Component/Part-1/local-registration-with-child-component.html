@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local registration with child component</title>
+</head>
+<body>
+
+<div id="app">
+    <parent-component>
+
+    </parent-component>
+
+</div>
+
+
+<script src="js/vue.js"></script>
+<script>
+//  第一种注册方式     父子组件的注册
+//    var Child = Vue.extend({
+//        template: '<div>This is a child component!</div>'
+//    });
+//
+//    var Parent = Vue.extend({
+//        template: '<div>This is a parent component</div><child-component></child-component>',
+//        components: {
+//            'child-component': Child
+//        }
+//    });
+//
+//    //  全局注册
+//    Vue.component( 'parent-component', Parent );
+//
+//    var vm = new Vue({
+//        el: '#app'
+//    });
+
+
+//  第二种注册方式     使用Vue.component()直接创建和注册组件：
+//    Vue.component('parent-component', {
+//        template: '<div>使用Vue提供的语法糖简化组件注册</div>'
+//    });
+//    var vm = new Vue({
+//        el: '#app'
+//    });
+
+
+//  第三种注册方式     在选项对象的components属性中实现局部注册：
+    var vm = new Vue({
+        el: '#app',
+        components: {
+            'parent-component': {
+                template: '<div>在选项对象的components属性中实现局部注册</div>'
+            }
+        }
+    });
+
+
+
+</script>
+</body>
+</html>

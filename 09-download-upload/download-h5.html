@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+    <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+    <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!--<img id="img" src="http://imagefile.zesthome.com.cn/modules/lemon/uploads/files/image_33332836348561427097064442.png" alt="" width="400px">-->
+<br>
+
+<!--<a id="downLoadImg" href="http://imagefile.zesthome.com.cn/modules/lemon/uploads/files/image_33332836348561427097064442.png" download="123">-->
+    <!--使用html5的download属性-->
+<!--</a>-->
+<button id="btn" class="btn btn-primary">下载img按钮</button>
+<br>
+
+<canvas id="myCanvas" width="500" height="500"></canvas>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+    $(function(){
+        var src = 'http://imagefile.zesthome.com.cn/modules/lemon/uploads/files/image_33332836348561427097064442.png';
+
+        $('#btn').on( 'click', function(){
+//            DownLoadReportIMG3(src, '1');
+//            saveAs( myCanvas.toDataURL('image/png'),"new" + '.png')
+            saveAs( src, '123');
+        });
+
+//        var img = new Image();
+//        img.crossOrigin = '*';
+//        img.onload = function(){
+//            var ctx = document.getElementById('myCanvas').getContext('2d');
+//            ctx.drawImage(this , 0, 0, 500, 500);
+//        };
+//        img.src = src;
+    });
+
+    function saveAs(Url,filename) {
+
+//        var blob = new Blob([''], {type: 'application/octet-stream'});
+//
+//        var url = URL.createObjectURL(blob);
+
+        var a = document.createElement('a');
+
+        a.href = Url;
+
+        a.download = filename;
+
+//        var evt = document.createEvent("HTMLEvents");
+//        evt.initEvent("click", false, false);
+//        a.dispatchEvent(evt);
+
+        var e = document.createEvent('MouseEvents');
+
+        e.initEvent('click', true, false);
+
+
+        a.dispatchEvent(e);
+
+//        window.URL.revokeObjectURL(url);
+    }
+
+
+</script>
+</body>
+</html>

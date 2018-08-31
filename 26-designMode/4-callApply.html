@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+    <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+    <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        #d1 {
+            background-color: #aaa;
+            width: 30%;
+            height: 200px;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+<div id="d1">
+
+</div>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+    var obj1 = {
+        name: 'sven'
+    };
+    var obj2 = {
+        name: 'anne'
+    };
+    var name = 'window';
+    var getName = function(){
+        console.log ( this.name );
+    };
+    getName(); // 输出: window
+    getName.call( obj1 ); // 输出: sven
+    getName.call( obj2 ); // 输出: anne
+    var fun = function(){
+        console.log('事件内部的this',this);
+    }.bind(document.getElementById('d1'));
+
+    fun();
+
+
+</script>
+</body>
+</html>

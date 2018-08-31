@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        li.completed {
+            text-decoration: line-through;
+        }
+        .margin-right-10 {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>My todos</h1>
+                <todo-item :todos="todos"></todo-item>
+            </div>
+        </div>
+    </div>
+    <template id="todo-item-template">
+
+        <ul class="list-group" v-if="todos.length > 0">
+            <li class="list-group-item" v-bind:class="{'completed': todo.completed}" v-for="todo in todos">
+                {{todo.title}}
+                
+                <button class="btn btn-danger btn-xs pull-right" @click="deleteTodo(todo)">Delete</button>
+                <button 
+                    class="btn btn-xs pull-right margin-right-10" 
+                    :class="{'btn-success': todo.completed,'btn-danger': !todo.completed}"
+                    @click="todoComplete(todo)">
+                    {{todo.completed ? 'completed' : 'pending'}}
+                </button>
+            </li>
+        </ul> 
+    </template>
+
+
+    <script src="https://vuejs.org/js/vue.js"></script>
+    <script>
+        var TodoItem = Vue.extend({
+            template: '#todo-item-template',
+            props: ['todos'],
+            methods: {
+                todoCompleted: function(todo){
+                    todo.completed = !todo.completed;
+                },
+                 deleteTodo: function(todo){
+                    var idx = this.todos.indexOf(todo);
+                    this.todos.splice(idx, 1);
+                },
+            }
+        });
+        Vue.component('todo-item', TodoItem);
+        new Vue({
+            el: '#app',
+            data: {
+                todos: [{ id: 0, title: 'Study Vue', completed: true}]
+            }
+        });
+    </script>
+</body>
+</html>

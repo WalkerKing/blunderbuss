@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高阶函数--回调函数</title>
+</head>
+<body>
+<h3>
+在 ajax 异步请求的应用中，回调函数的使用非常频繁。当我们想在 ajax 请求返回之后做一
+些事情， 但又并不知道请求返回的确切时间时， 最常见的方案就是把 callback 函数当作参数传入
+发起 ajax 请求的方法中，待请求完成之后执行 callback 函数</h3>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script>
+    var img = new Image();
+    img.src = 'http://www.hongyiart.com/upload/image/20151216/20151216111822_30596.jpg';
+    document.body.appendChild(img);
+
+//    以下为回调函数的一种用法，将函数作为参数传递给另一个函数
+    var createDiv100 = function(callback){
+        var arr = new Array(101);
+        arr.join(',').replace(/,/g,function(kw,idx){
+            var div = document.createElement('div');
+            div.innerHTML = idx+1;
+            document.body.appendChild(div);
+            if(typeof callback === 'function'){
+                callback(div);
+            }
+        });
+    };
+    createDiv100(function(node){
+        node.style.display = 'none';
+    });
+    createDiv100(function(node){
+        node.style.display = 'block';
+        node.style.height = '100px';
+    });
+
+
+//    以下仅做示例，说明回调的函数的用途，实际代码无法实现
+    var getInfo = function(kw,callback){
+        $.ajax('http://www.hongyiart.com/upload/image/20151216/' + kw, function(data){
+            if(typeof callback === 'function'){
+                callback( data );
+            }
+        });
+    };
+    getInfo('20151216111822_30596.jpg',function(data){ });
+</script>
+</body>
+</html>

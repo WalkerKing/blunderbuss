@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    .hasError {
+      border-color: #f2a696;
+      color: #D68273;
+    }
+  </style>
+</head>
+<body>
+<br>
+<form class="form-horizontal" id="form">
+  <div class="form-group">
+    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="input1">姓名:</label>
+    <div class="col-xs-12 col-sm-9">
+      <div class="clearfix">
+        <input type="email" name="email" data-type="STRING" id="input1" class="col-xs-12 col-sm-6" />
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="input2">年龄:</label>
+    <div class="col-xs-12 col-sm-9">
+      <div class="clearfix">
+        <input type="email" name="email" data-type="INT" id="input2" class="col-xs-12 col-sm-6" />
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="input3">身高:</label>
+    <div class="col-xs-12 col-sm-9">
+      <div class="clearfix">
+        <input type="email" name="email"  data-type="INT" id="input3" class="col-xs-12 col-sm-6" />
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="input4">体重:</label>
+    <div class="col-xs-12 col-sm-9">
+      <div class="clearfix">
+        <input type="email" name="email"  data-type="FLOAT" id="input4" class="col-xs-12 col-sm-6" />
+      </div>
+    </div>
+  </div>
+</form>
+<button id="validBtn" class="btn btn-info">点击开始验证</button>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script src="validation.js"></script>
+<script>
+  $(function(){
+    validBtn.onclick = function(){
+      sectionValidator('form');
+    };
+  });
+</script>
+</body>
+</html>

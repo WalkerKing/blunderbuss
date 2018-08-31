@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$broadcase</title>
+</head>
+<body>
+
+<div id="app">
+    <parent-component></parent-component>
+</div>
+<template id="parent-component">
+    <h2>父组件</h2>
+    <input v-model="msg">
+    <button v-on:click="notify">broadcast event</button>
+    <child-component></child-component>
+</template>
+<template id=child-component>
+    <ul>
+        <li v-for="item in message">
+            父组件输入了：{{ item }}
+        </li>
+    </ul>
+</template>
+
+
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        components: {
+            'parent-component': {
+                template: '#parent-component',
+                data: function(){
+                    return {
+                        msg: ''
+                    }
+                },
+                methods: {
+                    notify: function( ){
+                        if( this.msg.trim() ){
+                            this.$broadcast('parent-msg', this.msg);
+                            this.msg = '';
+                        }
+                    }
+                },
+                components: {
+                    'child-component': {
+                        template: '#child-component',
+                        data: function(){
+                            return {
+                                message: []
+                            }
+                        },
+                        events: {
+                            'parent-msg': function( msg ){
+                                this.message.push( msg );
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

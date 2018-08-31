@@ -1,0 +1,6 @@
+- 该项目为实验js是否可以实现混淆加密而开立
+- 内容参考：
+- http://div.io/topic/1220
+- http://utf-8.jp/public/aaencode.html
+- http://utf-8.jp/public/jjencode.html
+- https://www.zhihu.com/question/28468459

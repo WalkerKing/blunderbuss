@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lua.vm.js script example</title>
+
+</head>
+
+<body>
+
+
+
+<!-- begin script tag example -->
+<script>
+    console.time('T');
+</script>
+<script src="lua.vm.js-master/dist/lua.vm.js"></script>
+
+<script type="text/lua" src="1.js">
+<!--js.global:alert('hello from Lua script tag in HTML!') &#45;&#45; this is Lua!-->
+<!--js.global:print('hello from Lua script tag in HTML!') &#45;&#45; this is Lua!-->
+</script>
+
+<!-- end script tag example -->
+<script>
+    console.timeEnd('T');
+
+</script>
+
+</body>
+</html>
+

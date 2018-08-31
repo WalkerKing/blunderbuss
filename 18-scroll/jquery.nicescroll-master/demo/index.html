@@ -1,0 +1,115 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery NiceScroll Test Page</title>
+<meta name="viewport" content="user-scalable=no" />
+  <style type="text/css">
+    body{
+      height: 2000px;
+    }
+    #boxscroll {
+      padding: 40px;
+      height: 220px;
+      width: 300px;
+      border: 2px solid #00F;
+      overflow: auto;
+      margin-bottom:20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="div1"><strong>NiceScroll version:</strong></div>
+<em></em>
+<div id="boxscroll">
+  <div class="content">
+    <button class="active" id="btn1">切换</button>
+    <button id="btn2">回去</button>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad alias, amet, aperiam enim expedita fuga in ipsum libero non, placeat saepe tempore temporibus totam ut? Dolor placeat quia ratione!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid cum dignissimos doloribus eius expedita minima nisi nostrum omnis porro possimus quidem, quod rem sapiente sit tempora tempore ut!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid cum dignissimos doloribus eius expedita minima nisi nostrum omnis porro possimus quidem, quod rem sapiente sit tempora tempore ut!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid cum dignissimos doloribus eius expedita minima nisi nostrum omnis porro possimus quidem, quod rem sapiente sit tempora tempore ut!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid cum dignissimos doloribus eius expedita minima nisi nostrum omnis porro possimus quidem, quod rem sapiente sit tempora tempore ut!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid cum dignissimos doloribus eius expedita minima nisi nostrum omnis porro possimus quidem, quod rem sapiente sit tempora tempore ut!
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam aliquid cum dignissimos doloribus eius expedita minima nisi nostrum omnis porro possimus quidem, quod rem sapiente sit tempora tempore ut!
+  </div>
+
+</div>
+
+
+
+
+<script src="../../../common/jquery-1.12.4.js"></script>
+<script src="../jquery.nicescroll.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $("#boxscroll").niceScroll({
+      cursorcolor:"#666", // change cursor color in hex
+      cursoropacitymin: 0.3, // change opacity when cursor is inactive (scrollabar "hidden" state), range from 1 to 0
+      cursoropacitymax: 1, // change opacity when cursor is active (scrollabar "visible" state), range from 1 to 0
+      cursorwidth: '6px', // cursor width in pixel (you can also write "5px")
+      cursorborder: "2px solid #333", // css definition for cursor border
+      cursorborderradius: "2px", // border radius in pixel for cursor
+      zindex: 100, // change z-index for scrollbar div
+      scrollspeed: 60, // scrolling speed
+      mousescrollstep: 100, // scrolling speed with mouse wheel (pixel)
+      touchbehavior: false, // enable cursor-drag scrolling like touch devices in desktop computer
+      hwacceleration: true, // use hardware accelerated scroll when supported
+      boxzoom: false, // enable zoom for box content
+      dblclickzoom: true, // (only when boxzoom=true) zoom activated when double click on box
+      gesturezoom: true, // (only when boxzoom=true and with touch devices) zoom activated when pinch out/in on box
+      grabcursorenabled: true, // (only when touchbehavior=true) display "grab" icon
+      autohidemode: "scroll", // how hide the scrollbar works, possible values:
+//        autohidemode: true , // hide when no scrolling
+//        autohidemode:  "cursor" , // only cursor hidden
+//        autohidemode:  false , // do not hide,
+//        autohidemode: "leave" , // hide only if pointer leaves content
+//        autohidemode: "hidden" , // hide always
+//        autohidemode:"scroll", // show only on scroll
+      background: "#ddd", // change css for rail background
+      iframeautoresize: true, // autoresize iframe on load event
+      cursorminheight: 100, // set the minimum cursor height (pixel)
+      preservenativescrolling: true, // you can scroll native scrollable areas with mouse, bubbling mouse wheel event
+      railoffset: true, // you can add offset top/left for rail position
+      bouncescroll: false, // (only hw accell) enable scroll bouncing at the end of content as mobile-like
+      spacebarenabled: false, // enable page down scrolling when space bar has pressed
+      railpadding: { top: 0, right: 0, left: 0, bottom: 0 }, // set padding for rail bar
+      disableoutline: true, // for chrome browser, disable outline (orange highlight) when selecting a div with nicescroll
+      horizrailenabled: true, // nicescroll can manage horizontal scroll
+      railalign: 'right', // alignment of vertical rail
+      railvalign: 'bottom', // alignment of horizontal rail
+      enabletranslate3d: true, // nicescroll can use css translate to scroll content
+      enablemousewheel: true, // nicescroll can manage mouse wheel events
+      enablekeyboard: true, // nicescroll can manage keyboard events
+      smoothscroll: true, // scroll with ease movement
+      sensitiverail: true, // click on rail make a scroll
+      enablemouselockapi: true, // can use mouse caption lock API (same issue on object dragging)
+      cursorfixedheight: false, // set fixed height for cursor in pixel
+      hidecursordelay: 400, // set the delay in microseconds to fading out scrollbars
+      directionlockdeadzone: 6, // dead zone in pixels for direction lock activation
+      nativeparentscrolling: true, // detect bottom of content and let parent to scroll, as native scroll does
+      enablescrollonselection: true, // enable auto-scrolling of content when selection text
+      cursordragspeed: 0.3, // speed of selection when dragged with cursor
+      rtlmode: "auto", // horizontal div scrolling starts at left side
+      cursordragontouch: false, // drag cursor in touch / touchbehavior mode also
+      oneaxismousemode: "auto", // it permits horizontal scrolling with mousewheel on horizontal only content, if false (vertical-only) mousewheel don't scroll horizontally, if value is auto detects two-axis mouse
+      scriptpath: "", // define custom path for boxmode icons ("" => same script path)
+      preventmultitouchscrolling: true, // prevent scrolling on multitouch events
+      disablemutationobserver: false // force MutationObserver disabled
+
+    });
+    $('#btn1').click(function(){
+      $(this)[0].setAttribute('class','active');
+      $(this).removeClass('active');
+    });
+    $('#btn2').click(function(){
+      $(this)[0].setAttribute('class','active');
+    });
+  });
+
+</script>
+</body>
+</html>

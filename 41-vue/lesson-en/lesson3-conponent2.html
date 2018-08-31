@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        li.completed {
+            text-decoration: line-through;
+        }
+        .margin-right-10 {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>My todos</h1>
+                <todo-item :todos="todos"></todo-item>
+				<todo-add :newTodo.sync="newTodo" @event1="addNewTodo"></todo-add>
+            </div>
+        </div>
+    </div>
+    <template id="todo-item-template">
+
+        <ul class="list-group" v-if="todos.length > 0">
+            <li class="list-group-item" v-bind:class="{'completed': todo.completed}" v-for="todo in todos">
+                {{todo.title}}
+                
+                <button class="btn btn-danger btn-xs pull-right" @click="deleteTodo(todo)">Delete</button>
+                <button 
+                    class="btn btn-xs pull-right margin-right-10" 
+                    :class="{'btn-success': todo.completed,'btn-danger': !todo.completed}"
+                    @click="todoCompleted(todo)">
+                    {{todo.completed ? 'completed' : 'pending'}}
+                </button>
+            </li>
+        </ul> 
+    </template>
+    <template id="todo-add-template">
+    	<form @submit.prevent="addNewTodo">
+    		<div class="form-group">
+    			<input type="text" class="form-control" placeholder="Add new Todo" v-model="tempTodo.title">
+    		</div>
+    		<div class="form-group">
+    			<button class="btn btn-success">Add</button>
+    		</div>
+    	</form>
+    </template>
+
+
+    <script src="https://vuejs.org/js/vue.js"></script>
+    <script>
+        var TodoItem = Vue.extend({
+            template: '#todo-item-template',
+            props: ['todos'],
+            methods: {
+                todoCompleted: function(todo){
+                    todo.completed = !todo.completed;
+                },
+                 deleteTodo: function(todo){
+                    var idx = this.todos.indexOf(todo);
+                    this.todos.splice(idx, 1);
+                },
+            }
+        });
+        var TodoAdd = Vue.extend({
+        	template: '#todo-add-template',
+        	props: ['newTodo'],
+        	data: function(){
+        		return {
+        			tempTodo: { id: null, title: '', completed: false}
+        		};
+        	},
+        	methods: {
+        		addNewTodo: function(){
+                    // debugger;
+                    this.$emit('event1', this.tempTodo)
+                    this.tempTodo = { id: null, title: '', completed: false};
+        		}
+        	}
+        });
+        Vue.component('todo-item', TodoItem);
+        Vue.component('todo-add', TodoAdd);
+        new Vue({
+            el: '#app',
+            data: {
+                todos: [{ id: 0, title: 'Study Vue', completed: true}],
+                newTodo: { id: null, title: '', completed: false}
+            },
+            methods: {
+                addNewTodo: function(tempTodo) {
+                    this.todos.push(tempTodo);    
+                }
+            }
+        });
+    </script>
+</body>
+</html>

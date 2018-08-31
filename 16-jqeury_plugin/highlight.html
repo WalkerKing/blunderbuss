@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<p id="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae cum illum inventore iusto obcaecati officiis quidem ut. Accusantium aliquid atque aut consequuntur eligendi iusto laborum nostrum officiis reprehenderit ullam!</p>
+
+
+  <script src="../common/jquery-1.12.4.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+  <script>
+    (function ($) {
+      $.fn.extend({
+        "highLight": function (options) {
+          //检测用户传进来的参数是否合法
+          if (!isValid(options))
+            return this;
+          var opts = $.extend({}, defaluts, options); //使用jQuery.extend 覆盖插件默认参数
+          return this.each(function () {  //这里的this 就是 jQuery对象。这里return 为了支持链式调用
+            //遍历所有的要高亮的dom,当调用 highLight()插件的是一个集合的时候。
+            var $this = $(this); //获取当前dom 的 jQuery对象，这里的this是当前循环的dom
+            //根据参数来设置 dom的样式
+            $this.css({
+              backgroundColor: opts.background,
+              color: opts.foreground
+            });
+            //格式化高亮文本
+            var markup = $this.html();
+            markup = $.fn.highLight.format(markup);
+            $this.html(markup);
+          });
+        }
+      });
+      //默认参数
+      var defaluts = {
+        foreground: 'red',
+        background: 'yellow'
+      };
+      //公共的格式化 方法. 默认是加粗，用户可以通过覆盖该方法达到不同的格式化效果。
+      $.fn.highLight.format = function (str) {
+        return "<strong>" + str + "</strong>";
+      }
+      //私有方法，检测参数是否合法
+      function isValid(options) {
+        return !options || (options && typeof options === "object") ? true : false;
+      }
+    })(window.jQuery);
+    (function($, window){
+      // 初始态定义
+      var _oDialogCollections = {};
+
+      // 插件定义
+      $.fn.MNDialog = function (_aoConfig) {
+        // 默认参数，可被重写
+        var defaults = {
+          // string
+          sId : "",
+          // num
+          nWidth : 400,
+          // bollean
+          bDisplayHeader : true,
+          // object
+          oContentHtml : "",
+          // function
+          fCloseCallback : null
+        };
+
+        var _oSelf = this,
+            $this = $(this);
+
+        // 插件配置
+        this.oConfig = $.extend(defaults, _aoConfig);
+
+        // 初始化函数
+        var _init = function () {
+          if (_oDialogCollections) {
+            // 对于已初始化的处理
+            // 如果此时已经存在弹框，则remove掉再添加新的弹框
+          }
+          // 初始化弹出框数据
+          _initData();
+          // 事件绑定
+          _loadEvent();
+          // 加载内容
+          _loadContent();
+        }
+        // 私有函数
+        var _initData = function () {};
+        var _loadEvent = function () {};
+        var _loadContent = function () {
+          // 内容（分字符和函数两种，字符为静态模板，函数为异步请求后组装的模板，会延迟，所以特殊处理）
+          if($.isFunction(_oSelf.oConfig.oContentHtml)) {
+            _oSelf.oConfig.oContentHtml.call(_oSelf, function(oCallbackHtml) {
+              // 便于传带参函数进来并且执行
+              _oSelf.html(oCallbackHtml);
+              // 有回调函数则执行
+              _oSelf.oConfig.fLoadedCallback && _oSelf.oConfig.fLoadedCallback.call(_oSelf, _oSelf._oContainer$);
+            });
+          } else if ($.type(_oSelf.oConfig.oContentHtml) === "string") {
+            _oSelf.html(_oSelf.oConfig.oContentHtml);
+            _oSelf.oConfig.fLoadedCallback && _oSelf.oConfig.fLoadedCallback.call(_oSelf, _oSelf._oContainer$);
+          } else {
+            console.log("弹出框的内容格式不对，应为function或者string。");
+          }
+        };
+
+        // 内部使用参数
+        var _oEventAlias = {
+          click         : 'D_ck',
+          dblclick     : 'D_dbl'
+        };
+
+        // 提供外部函数
+        this.close = function () {
+          _close();
+        }
+
+        // 启动插件
+        _init();
+
+        // 链式调用
+        return this;
+      };
+      // 插件结束
+    })(jQuery, window);
+    $(function(){
+      $.fn.highLight.format = function(s){
+
+      }
+      $('#p1').highLight();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<button id="btn">打开二级页面</button>
+
+
+<script>
+    var CHILD_WINDOW_NAME = '123',
+        CHILD_WINDOW_ATTRS = '456',
+        CHILD_WINDOW_URL = 'second.html';
+    window.onload = function(){
+        document.getElementById('btn').addEventListener('click', function(){
+            win = window.open('',  CHILD_WINDOW_NAME, CHILD_WINDOW_ATTRS);
+            if (win.location.href === "about:blank") {
+                //窗口不存在
+                win = window.open(CHILD_WINDOW_URL,  CHILD_WINDOW_NAME, CHILD_WINDOW_ATTRS);
+            } else {
+                //窗口以已经存在了
+                win.focus();
+            }
+        });
+
+    }
+</script>
+</body>
+</html>

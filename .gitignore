@@ -1,0 +1,11 @@
+.idea/
+.project
+*.mp3
+node_modules/
+dist/
+!bootstrap-3.3.6
+note.xls
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_*

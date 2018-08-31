@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>banner动画</title>
+	<style>
+		.app {
+			overflow: hidden;
+			text-align: center;
+		}
+		.app>img {
+			transition: all linear 5s;
+			margin-left: -10%;
+		}
+	</style>
+</head>
+<body>
+	<div class="app">
+		<img width="120%" src="img/banner1.jpg" alt="">
+	</div>
+
+	<script>
+		window.onload = function(){
+			setTimeout(function(){
+				console.log(document.querySelector('.app>img'))
+				document.querySelector('.app>img').style.width = '100%'
+				document.querySelector('.app>img').style.marginLeft = '0'
+			}, 1000)
+		}
+	</script>
+</body>
+</html>

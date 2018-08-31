@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn1">打开receive.html</button>
+
+
+<script>
+			//create popup window
+	var domain = 'http://115.159.100.234/postMessage';
+	document.getElementById('btn1').addEventListener('click', function(){
+		var myPopup = window.open(domain + '/receive.html','myWindow');
+	//periodical message sender
+	setInterval(function(){
+		var message = 'Hello!  The time is: ' + (new Date().getTime());
+		console.log('blog.local:  sending message:  ' + message);
+		myPopup.postMessage(message,domain); //send the message and target URI
+	},6000);
+
+	//listen to holla back
+	window.addEventListener('message',function(event) {
+		if(event.origin !== 'http://115.159.100.234') return;
+		console.log('received response:  ',event.data);
+	},false);
+	});
+	
+</script>
+</body>
+</html>

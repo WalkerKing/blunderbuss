@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>image对象</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<h2>判断图片是否已经存在缓存中</h2>
+<pre>
+    var url = "http://......../image.jpg";
+    var img = new Image();
+    img.src = url;
+    if(img.complete||img.width) {
+    alert('该图片已经存在于缓存之中，不会再去重新下载');
+    }
+</pre>
+<pre>
+    解释一下，添加img.naturalWidth获取图片原始尺寸，当图片未加载（未缓存、或加载失败）时该值为0，当然如果有缓存的话，返回的就是图片的原始尺寸。
+
+所以img.complete||img.naturalWidth 在js onload事件之前，如果图片已经显示，或获取的尺寸大于零，表示图片onload之前已经加载完成。
+
+ PS:naturalWidth只有高版本浏览器支持(safari,firefox,chrome,与opera10+)，低版本的话，直接用img.width
+</pre>
+<pre>
+    function loadImage(url, callback) {
+        var img = new Image(); //创建一个Image对象，实现图片的预下载
+        img.src = url;
+        if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数
+            callback.call(img);
+            return; // 直接返回，不用再处理onload事件
+        }
+        img.onload = function () { //图片下载完毕时异步调用callback函数。
+            callback.call(img);//将回调函数的this替换为Image对象
+        };
+    }
+</pre>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+    var url = "http://imagefile.zesthome.com.cn/modules/lemon/uploads/files/image_33332836348561427097064442.png";
+    var img = new Image();
+    img.src = url;
+    if(img.complete) {
+        alert('该图片已经存在于缓存之中，不会再去重新下载');
+    }
+
+
+    function loadImage(url, callback) {
+        var img = new Image(); //创建一个Image对象，实现图片的预下载
+        img.src = url;
+        if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数
+            callback.call(img);
+            return; // 直接返回，不用再处理onload事件
+        }
+        img.onload = function () { //图片下载完毕时异步调用callback函数。
+            callback.call(img);//将回调函数的this替换为Image对象
+        };
+    }
+
+
+</script>
+</body>
+</html>

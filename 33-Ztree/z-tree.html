@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="zTree_v3-master/css/demo.css">
+    <link rel="stylesheet" href="zTree_v3-master/css/zTreeStyle/zTreeStyle.css">
+    <!--[if lt IE 9]>
+    <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+    <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<ul id="treeDemo1" class="ztree"></ul>
+<ul id="treeDemo2" class="ztree"></ul>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script src="zTree_v3-master/js/jquery.ztree.all.js"></script>
+<script>
+    var zTreeObj;
+    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+    var clickFn = function (e, id, node, n){
+        var arr = node.getPath();
+        console.log(arr);
+    };
+    var setting1 = {
+        callback: {
+            onClick: clickFn
+        }
+    };
+    var setting2 = {
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "pId",
+                rootPId: 0
+            }
+        }
+    };
+    // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+    var zNodes1 =
+        {
+            name:"root",
+            open:open,
+            children:[
+                {
+                    name:"test2",
+                    open:open,
+                    children:[
+                        {name:"test2_1"},
+                        {name:"test2_2"}
+                    ]
+                },
+                {
+                    name:"test2",
+                    open:false,
+                    children:[
+                        {name:"test2_1"},
+                        {name:"test2_2"}
+                    ]
+                },
+                {
+                    name:"test2",
+                    open:false,
+                    children:[
+                        {name:"test2_1"}, {name:"test2_2"}
+                    ]
+                },
+                {
+                    name:"test2",
+                    open:false,
+                    children:[
+                        {name:"test2_1"},
+                        {name:"test2_2"}
+                    ]
+                }
+            ]
+        };
+    var zNodes2 = [{"id":1, "pId":0, "name":"test1", open: true},
+          {"id":11, "pId":1, "name":"test11"},
+          {"id":12, "pId":1, "name":"test12"},
+          {"id":111, "pId":11, "name":"test111"}];
+
+    $(document).ready(function(){
+        zTreeObj = $.fn.zTree.init($("#treeDemo1"), setting1, zNodes1);
+        $.fn.zTree.init($("#treeDemo2"), setting2, zNodes2);
+    });
+
+</script>
+</body>
+</html>

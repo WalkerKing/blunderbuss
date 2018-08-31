@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>侦测打开浏览器的设备</title>
+</head>
+<body>
+<h1>原生js侦测设备</h1>
+<h1>原生js动态加载jquery</h1>
+
+<script>
+    var loadJS = function(url, callback) {
+        var head = document.getElementsByTagName("head")[0];
+        var script = document.createElement("script");
+        script.src = url;
+        var done = false;
+        script.onload = script.onreadystatechange = function() {
+            if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+                done = true;
+                callback();
+                script.onload = script.onreadystatechange = null;
+                head.removeChild(script);
+            }
+        };
+        head.appendChild(script);
+    };
+    function deviceDetect() {
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+            return 'phone';
+        } else {
+            return 'pc';
+        }
+    }
+    loadJS('//cdn.bootcss.com/jquery/3.2.1/jquery.min.js',function(){
+        console.log('jqeury加载完毕，设备是'+deviceDetect());
+    });
+</script>
+</body>
+</html>

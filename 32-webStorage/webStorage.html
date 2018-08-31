@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script>
+  window.onload = function(){
+    var obj = {
+      a: 'string',
+      b: {
+        c: 123,
+        d: true
+      },
+      e: [1,2,3]
+    };
+    sessionStorage.setItem('obj',JSON.stringify(obj));  //  把数据存入本地
+    var o = sessionStorage.getItem('obj');  //  取出本地存储的数据
+    console.log(JSON.parse(o));   //  将数据转换成对象打印出来
+    sessionStorage.removeItem('obj'); //  清楚本地存储的数据
+  }
+</script>
+</body>
+</html>

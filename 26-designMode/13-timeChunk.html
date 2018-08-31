@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <h3>分时函数</h3>
+  <pre>
+    创建 WebQQ的 QQ好友列表。列表中通常会有成百上千个好友，如果一个好友
+用一个节点来表示，当我们在页面中渲染这个列表的时候，可能要一次性往页面中创建成百上千
+个节点。 在短时间内往页面中大量添加 DOM节点显然也会让浏览器吃不消，我们看到的结果往往就
+是浏览器的卡顿甚至假死。  </pre>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+  var timeChunk = function( arr, fn, count ){
+    var obj, timer;
+    var start = function (){
+      for ( var i = 0; i < Math.min( count || 1 , arr.length ); i ++ ){
+        obj = arr.shift();
+        fn( obj );
+      }
+    };
+    return function(){
+      timer = setInterval( function(){
+        if( arr.length === 0 ){
+          clearInterval(timer);
+          timer = null;
+        }
+        start();
+      }, 200 );
+    };
+  };
+</script>
+</body>
+</html>

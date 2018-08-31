@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class 与 Style 绑定</title>
+    <style>
+        .active {
+            background: #f1a417;
+            color: #4c4c4c;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div v-bind:class="{ active: isActive}">这是用v-bind动态绑定class的div</div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActive: true
+        }
+    });
+</script>
+</body>
+</html>

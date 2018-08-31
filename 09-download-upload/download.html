@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>图片本地存储研究</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+	<style>
+		ul>li {
+			float: left;
+			width: 25%;
+		}
+		ul>li>img {
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<h2>图片本地存储研究</h2>
+	<ul class="list-unstyled">
+		<li><img src="loading.gif" alt="下载中"></li>
+		<li><img src="loading.gif" alt="下载中"></li>
+		<li><img src="loading.gif" alt="下载中"></li>
+		<li><img src="loading.gif" alt="下载中"></li>
+	</ul>
+		
+	<button id="downloadImg" class="btn btn-primary">下载</button>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script type="text/javascript" >
+	$(function(){
+		$.download = function(url, method, data){
+		    console.log('form download');
+		    $('<form action="'+url+'" method="'+(method||'post')+'" target="_blank" enctype ="application/x-www-form-urlencoded; charset=UTF-8">' +  // action请求路径及推送方法
+		        '<input type="text" name="input" value="'+data+'"/>' + // 文件名称
+		        '</form>')
+		        .appendTo(document.body).submit()
+		        .remove();
+		};
+		$('#downloadImg').click(function() {
+			$.download('http://f.hiphotos.baidu.com/image/pic/item/503d269759ee3d6db032f61b48166d224e4ade6e.jpg', 'post', '桌面');
+		});
+	});
+</script>
+</body>
+</html>

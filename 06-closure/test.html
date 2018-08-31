@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包面试题</title>
+</head>
+<body>
+
+
+<script>
+    var funcs = [];
+    for( var i = 0; i < 5; i++ ){
+        funcs.push(function(){
+            console.log(i);
+        });
+    }
+    funcs[2]();
+    (function(){
+        var i = 9;
+        funcs[2]();
+    })();
+</script>
+</body>
+</html>

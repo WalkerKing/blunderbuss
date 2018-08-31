@@ -1,0 +1,22 @@
+{
+  "name": "blunderbuss",
+  "version": "1.0.0",
+  "description": "这是一个演草纸项目，在工作中遇到问题先在这里写demo进行验证",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FEspace/blunderbuss.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FEspace/blunderbuss/issues"
+  },
+  "homepage": "https://github.com/FEspace/blunderbuss#readme",
+  "devDependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

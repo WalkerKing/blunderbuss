@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+    <h1>职责链模式</h1>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+  $(function(){
+    var resChain1 = function(){
+      var order500 = function( orderType, pay, stock ){
+        if ( orderType === 1 && pay === true ){
+          console.log( '500元定金预购，得到 100优惠券' );
+        }else{
+          return 'nextSuccessor';    // 我不知道下一个节点是谁，反正把请求往后面传递
+        }
+      };
+      var order200 = function( orderType, pay, stock ){
+        if ( orderType === 2 && pay === true ){
+          console.log( '200元定金预购，得到 50 优惠券' );
+        }else{
+          return 'nextSuccessor';    // 我不知道下一个节点是谁，反正把请求往后面传递
+        }
+      };
+      var orderNormal = function( orderType, pay, stock ){
+        if ( stock > 0 ){
+          console.log( '普通购买，无优惠券' );
+        }else{
+          console.log( '手机库存不足' );
+        }
+      };
+      var Chain = function( fn ){
+        this.fn = fn;
+        this.successor = null;
+      };
+      Chain.prototype.setNextSuccessor = function( successor ){
+        return this.successor = successor;
+      };
+      Chain.prototype.passRequest = function(){
+        var ret = this.fn.apply( this, arguments );
+        if( ret === 'nextSuccessor' ){
+          return this.successor && this.successor.passRequest.apply( this.successor, arguments );
+        }
+        return ret;
+      };
+      var chainOrder500 = new Chain( order500 );
+      var chainOrder200 = new Chain( order200 );
+      var chainOrderNormal = new Chain( orderNormal );
+
+      chainOrder500.setNextSuccessor( chainOrder200 );
+      chainOrder200.setNextSuccessor( chainOrderNormal );
+      chainOrder500.passRequest( 2, true, 500 );
+      chainOrder500.passRequest( 2, false, 500 );
+    };
+//    resChain1();
+    var resChain2 = function(){
+      var Chain = function( fn ){
+        this.fn = fn;
+        this.successor = null;
+      };
+      Chain.prototype.setNextSuccessor = function( successor ){
+        return this.successor = successor;
+      };
+      Chain.prototype.passRequest = function(){
+        var ret = this.fn.apply( this, arguments );
+        if( ret === 'nextSuccessor' ){
+          return this.successor && this.successor.passRequest.apply( this.successor, arguments );
+        }
+        return ret;
+      };
+      Chain.prototype.next = function(){
+        return this.successor && this.successor.passRequest.apply( this.successor, arguments );
+      };
+      var fn1 = new Chain(function(){
+        console.log( 1 );
+        return 'nextSuccessor';
+      });
+      var fn2 = new Chain(function(){
+        console.log( 2 );
+        var self = this;
+        setTimeout(function(){
+          self.next();
+        }, 1000);
+      });
+      var fn3 = new Chain(function(){
+        console.log( 3 );
+      });
+      fn1.setNextSuccessor( fn2 ).setNextSuccessor( fn3 );
+      fn1.passRequest();
+
+    };
+    resChain2();
+
+
+
+  });
+</script>
+</body>
+</html>

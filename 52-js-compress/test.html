@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试lz-string</title>
+</head>
+<body>
+<h2>测试lz-string</h2>
+
+<div><input id="input" type="text" value="这是一段测试文本"></div>
+<div><button id="startBtn">转换</button></div>
+<label for="output">转换输出</label>
+<div id="output"></div>
+<script src="lz-string-master/libs/lz-string.js"></script>
+<script>
+    var getElById = function(id){
+        return document.getElementById(id);
+    };
+    window.onload = function(){
+        var param = getUrlParam('param');
+        if(param){
+            console.log('地址栏携带的参数为：' + param);
+            console.log('解码后为：' + LZString.decompressFromEncodedURIComponent(param));
+        }
+
+        document.getElementById('startBtn').addEventListener('click', function(){
+            var string = getElById('input').value;
+            console.log("原文长度: " + string.length);
+            var compressed = LZString.compressToEncodedURIComponent(string);
+            document.getElementById('output').innerHTML = compressed;
+            console.log('压缩后长度：' + compressed.length);
+
+            console.log("Size of compressed sample is: " + compressed.length);
+            string = LZString.decompressFromEncodedURIComponent(compressed);
+            console.log("解压后: " + string);
+            // location.href = window.location.href + '?param=' + compressed;
+        });
+    };
+    function getUrlParam(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<button class="btn btn-danger btn-lg" id="modalBtn">弹框</button>
+<div class="modal fade in" id="tempModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="modal-title">请选择模板</h4>
+            </div>
+            <div class="modal-body row">
+                <div class="col-xs-3">
+                    <div class="content_wrap">
+                        <div class="zTreeDemoBackground left" style="min-height: 0">
+                            <ul id="treeDemos" class="ztree"><li id="treeDemos_1" class="level0" tabindex="0" hidefocus="true" treenode=""><span id="treeDemos_1_switch" title="" class="button level0 switch root_close" treenode_switch=""></span><a id="treeDemos_1_a" class="level0 curSelectedNode" treenode_a="" onclick="" target="_blank" style="" title="根节点"><span id="treeDemos_1_ico" title="" treenode_ico="" class="button ico_close" style=""></span><span id="treeDemos_1_span" class="node_name">根节点</span><span class="button edit" id="treeDemos_1_edit" title="rename" treenode_edit="" style=""></span><span class="button remove" id="treeDemos_1_remove" title="remove" treenode_remove="" style=""></span></a></li></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-9 no-padding-left">
+                    <div class="widget-box showList">
+                        <div class="widget-body">
+                            <table class="model-tabel table table-bordered table-hover table-striped">
+                                <thead class="thin-border-bottom">
+                                <tr class="row">
+                                    <td class="col-xs-3">名称</td>
+                                    <td class="col-xs-9">描述</td>
+                                </tr>
+                                </thead>
+
+                                <tbody><tr class="row section-item" data-id="586dffff9d8e87b371eeae0e" data-type="undefined"><td class="col-xs-3 ">transform(ceshi template)</td><td class="col-xs-9">template</td></tr><tr class="row section-item" data-id="586356099d8e87cf47783eb0" data-type="undefined"><td class="col-xs-3 ">bomCNodes测试</td><td class="col-xs-9">bomCNodes测试</td></tr><tr class="row section-item" data-id="586355b79d8e87ce47783eb2" data-type="undefined"><td class="col-xs-3 ">bomCNode测试</td><td class="col-xs-9">bomCNode测试</td></tr><tr class="row section-item" data-id="586355029d8e87cf47783eae" data-type="undefined"><td class="col-xs-3 ">bomNodes测试</td><td class="col-xs-9">bomNodes测试</td></tr><tr class="row section-item" data-id="586354ae9d8e87ce47783eae" data-type="undefined"><td class="col-xs-3 ">bomNode测试</td><td class="col-xs-9">bomNode测试</td></tr><tr class="row section-item" data-id="586337ea9d8e87d4452e4d63" data-type="undefined"><td class="col-xs-3 ">dateTime测试</td><td class="col-xs-9">dateTime测试</td></tr><tr class="row section-item" data-id="5863372f9d8e87b1402e550b" data-type="undefined"><td class="col-xs-3 ">date测试</td><td class="col-xs-9">date测试</td></tr><tr class="row section-item" data-id="586331a59d8e87b1402e550a" data-type="undefined"><td class="col-xs-3 ">json测试</td><td class="col-xs-9">json测试</td></tr><tr class="row section-item" data-id="586330b89d8e87d4452e4cf1" data-type="undefined"><td class="col-xs-3 ">lua测试</td><td class="col-xs-9">lua测试</td></tr><tr class="row section-item" data-id="58632feb9d8e87b1402e5508" data-type="undefined"><td class="col-xs-3 ">FBX测试</td><td class="col-xs-9">FBX测试</td></tr></tbody>
+                            </table>
+                            <div class="modal-footer no-margin-top">
+                                <div class="pull-left" style="line-height: inherit">
+                                    总页数:
+                                    <span class="page-num label label-warning" style="line-height: inherit">4</span>
+                                    &nbsp;
+                                    &nbsp;
+                                    当前页:
+                                    <span class="page-current label label-success" style="line-height: inherit">1</span>
+                                </div>
+                                <ul class="pagination pull-right no-margin ">
+                                    <li class="disabled" id="prev">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-angle-double-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="active" id="page-view1">
+                                        <a href="#">1</a>
+                                    </li>
+
+                                    <li class="" id="page-view2">
+                                        <a href="#">2</a>
+                                    </li>
+
+                                    <li class="" id="page-view3">
+                                        <a href="#">3</a>
+                                    </li>
+
+                                    <li class="" id="next">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-angle-double-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary btn-sm confirmBtn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+    $(function(){
+        $('#modalBtn').click(function(){
+            $('#tempModal').modal('show');
+        });
+    });
+</script>
+</body>
+</html>

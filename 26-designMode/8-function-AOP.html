@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>使用高阶函数实现AOP</title>
+  <style>
+    #button {
+      width: 100px; height: 40px;
+      background: #00b3ee;
+      color: #fff;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+<h3>AOP:AOP（面向切面编程）的主要作用是把一些跟核心业务逻辑模块无关的功能抽离出来，这些<br>
+  业务逻辑无关的功能通常包括日志统计、安全控制、异常处理等。把这些功能抽离出来之后，<br>
+  通过“动态织入”的方式掺入业务逻辑模块中。这样做的好处首先是可以保持业务逻辑模块的<br>
+  纯净和高内聚性，其次是可以很方便地复用日志统计等功能模块。</h3>
+
+<p>点击登录按钮同时进行数据统计上报</p>
+<button tag="login" id="button">登录</button>
+<script>
+  /*
+  if(!Function.prototype.before){
+    Function.prototype.before = function( beforeFn ){
+      var _self = this;   //  保存原函数的引用，this此时指向调用before的对象
+      return function(){  //  before执行的时候获得这个return的函数
+//        console.log(this);
+        beforeFn.apply( this, arguments );  //  执行该函数的时候会先执行beforeFn传入当前this和参数
+        return _self.apply( this, arguments );  //  再执行原函数
+//        _self();
+      };
+    };
+  }
+  if(!Function.prototype.after){
+    Function.prototype.after = function(afterFn){
+      var _self = this;   //  保存对原函数的引用
+      return function(){  //  在调用after的时候返回这个函数
+        var ret = _self.apply( this, arguments );   //  首先执行原来函数
+        afterFn.apply( this, arguments );   //  然后执行after的回调函数
+        return ret;
+      }
+    }
+  }
+  var log2 = function(){
+    console.log(2);
+  };
+  log2 = log2.before(function(){
+    console.log(1);
+  });
+  log2 = log2.after(function(){
+    console.log(3);
+  });
+
+//  log2();
+  */
+  //
+  var login = function(){
+    console.log('用户登录了');
+  };
+  var log = function(tag){
+    console.log('日志上传');
+    //  请求操作
+    (new Image()).src = "http://pic1.win4000.com/wallpaper/4/582048fe5c14d.jpg?tag=" + tag;
+  };
+  var After = function( fn, afterFn ){
+    return function(){
+      var ret = fn.apply( this, arguments );
+      afterFn.apply( this, arguments );
+      return ret;
+    };
+  };
+  var Before = function( fn, beforeFn ){
+    return function(){
+      beforeFn.apply( this, arguments );
+      return fn.apply( this, arguments );
+    };
+  };
+  login = After( login, log );
+  login = Before( login, log );
+
+  document.getElementById('button').addEventListener('click',login);
+
+
+
+
+</script>
+</body>
+</html>

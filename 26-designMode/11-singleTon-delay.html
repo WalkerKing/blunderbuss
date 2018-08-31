@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>通用的惰性单例</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2>通用的惰性单例</h2>
+  <pre>
+    管理单例的逻辑其实是完全可以抽象出来的，这个逻辑始终是一样的：用一个变量来标志是否创建
+过对象，如果是，则在下次直接返回这个已经创建好的对象。
+    var getSingle = function( fn ){
+    var ret;
+    return function(){
+      return ret || ( ret = fn.apply( this, arguments) );
+    }
+  };
+    现在我们就把如何管理单例的逻辑从原来的代码中抽离出来，这些逻辑被封装在 getSingle
+函数内部，创建对象的方法 fn被当成参数动态传入 getSingle函数。
+  </pre>
+  <pre>
+    我们通常渲染完页面中的一个列表之后，接下来要给这个列表绑定 click事件，如果是通过 ajax动态往列表里追加数据，在使用事件代理的前提
+下，click 事件实际上只需要在第一次渲染列表的时候被绑定一次，但是我们不想去判断当前是
+否是第一次渲染列表，如果借助于 jQuery，我们通常选择给节点绑定 one事件。
+  </pre>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+
+  var getSingle = function( fn ){
+    var ret;
+    return function(){
+      return ret || ( ret = fn.apply( this, arguments) );
+    }
+  };
+  var createDiv = function( html ){
+    var div = document.createElement('div');
+    div.innerHTML = html;
+    document.body.appendChild( div );
+    return div;
+  };
+  var createSingleDiv = getSingle( createDiv );
+  var d1 = createSingleDiv(1);
+  var d2 = createSingleDiv(2);
+  console.log( d1 === d2 );
+
+</script>
+</body>
+</html>

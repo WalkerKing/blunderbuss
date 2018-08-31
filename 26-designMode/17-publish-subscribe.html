@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <h2>发布订阅模式</h2>
+
+  <dl>
+    <dt>1.自定义事件-customEventA </dt>
+    <dd>首先要指定好谁充当发布者（比如售楼处）</dd>
+    <dd>然后给发布者添加一个缓存列表，用于存放回调函数以便通知订阅者（售楼处的花名册）</dd>
+    <dd>最后发布消息的时候，发布者会遍历这个缓存列表，依次触发里面存放的订阅者回调函
+      数（遍历花名册，挨个发短信）</dd>
+    <dt>2.发布－订阅模式的通用实现-customEventB</dt>
+    <dd>把发布—订阅的功能提取出来，放在一个单独的对象内</dd>
+    <dd>增加一个标示 key，让订阅者只订阅自己感兴趣的消息</dd>
+    <dt>3.取消订阅的实现</dt>
+    <dt>4.实例-login</dt>
+    <dd>
+      网站登录：
+    </dd>
+    <dd>
+      网站里有 header头部、nav导航、消息列表、购物车等模块。这几个模块的渲染有一个共同的前提条件， 就是必须先用 ajax异步请求获取用户的登录信息。
+      这是很正常的，比如用户的名字和头像要显示在 header模块里，而这两个字段都来自用户登录后返回的信息。
+      用发布—订阅模式重写之后，对用户信息感兴趣的业务模块将自行订阅登录成功的消息事件。
+      当登录成功时，登录模块只需要发布登录成功的消息，而业务方接受到消息之后，就会开始进行
+      各自的业务处理，登录模块并不关心业务方究竟要做什么，也不想去了解它们的内部细节。
+    </dd>
+  </dl>
+
+  <button id="btn" class="btn btn-lg btn-info">点击触发异步事件</button>
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+  var customEventA = function(){
+    var saleOffices = {};
+    saleOffices.clientList = [];
+    saleOffices.listen = function( fn ){
+      saleOffices.clientList.push( fn );
+    };
+    saleOffices.trigger = function(){
+      for( var i = 0, fn; fn = saleOffices.clientList[ i++ ]; ){
+        fn.apply( this, arguments );
+      }
+    };
+    saleOffices.listen( function( price, squareMeter ){
+      console.log( 'price:' + price );
+      console.log( 'squareMeter:' + squareMeter );
+    } );
+    saleOffices.listen( function( price, squareMeter ){
+      console.log( 'price:' + price );
+      console.log( 'squareMeter:' + squareMeter );
+    } );
+    saleOffices.trigger( 4000, 80 );
+    saleOffices.trigger( 5000, 110 );
+  };
+//  customEvent();
+  var customEventB = function(){
+    var event = {
+      clientList: [],
+      listen: function( key, fn ){
+        if( !this.clientList[ key ]){
+          this.clientList[ key ] = [];
+        }
+        this.clientList[ key ].push( fn );
+      },
+      trigger: function(){
+        var key = [].shift.call( arguments ),
+          fns = this.clientList[ key ];
+        if( !fns || fns.length === 0 ){
+          return false;
+        }
+        for( var i = 0, fn; fn = fns[ i++ ]; ){
+          fn.apply( this, arguments );
+        }
+      },
+      remove: function( key, fn ){
+        var fns = this.clientList[ key ];
+        if( !fns ){ return false; }
+        if( !fn ){  //  如果只传了一个参数key，说明取消该键下的所有订阅事件
+          fns && ( fns.length = 0 );
+        }else{
+          for( var l = fns.length -1; l > 0; l--){
+            if( fns[ l ] === fn ){
+              fns.splice( l,1 );
+            }
+          }
+        }
+      }
+    };
+    var installEvent = function( obj ){
+      for( var i in event ){
+        obj[ i ] = event[ i ];
+      }
+    };
+    var salesOffices = {};
+    installEvent(salesOffices);
+    salesOffices.listen( 's88', function( price ){
+      console.log('面积：'+ price);
+    });
+    salesOffices.listen( 's110', function( price ){
+      console.log('面积：'+ price);
+    });
+    salesOffices.trigger('s88',10000);
+    salesOffices.trigger('s110',9000);
+    return event;
+  };
+//  customEventB();
+  var logIn = function(){
+    var login = {
+      client: [],
+      listen: function( key, fn ){
+        if( !this.client[key] ){
+          this.client[key] = [];
+        }
+        this.client[ key ].push( fn );
+      },
+      trigger: function(){
+        var key = [].shift.call( arguments );
+        var fns = this.client[ key ];
+        if( !fns || fns.length === 0 ){
+          return false;
+        }
+        for( var i = 0, fn; fn = fns[ i++ ];){
+          fn.apply( this, arguments );
+        }
+      },
+      remove: function(){}
+    };
+    $('#btn').on( 'click', function(){
+      login.trigger( 'loginSucc', '登录成功' );
+    } );
+
+
+//    其他订阅模块
+    var address = (function(){  //  收货地址模块
+      login.listen( 'loginSucc', function(){
+        address.refresh();
+      });
+      return {
+        refresh: function(){
+          console.log('刷新收货地址！');
+        }
+      };
+    })();
+    var nav = (function(){  //  导航模块
+      login.listen( 'loginSucc',function(){
+        nav.setAvatar();
+      });
+      return {
+        setAvatar: function(){
+          console.log( '设置头像！' );
+        }
+      };
+    })();
+  };
+//  logIn();
+
+</script>
+</body>
+</html>

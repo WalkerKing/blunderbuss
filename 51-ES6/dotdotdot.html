@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>三个点的意思?</h1>
+
+    <script>
+        /*rest参数*/
+        const fn1 = (x, y, z) => {
+            console.log(x+y+z);
+        }
+        // fn1(1,2,43);
+        const fn2 = (...x) => {
+            let sum = 0;
+            for(let v of x){
+                sum += v;
+            }
+            console.log(sum);
+        }
+        // fn2(1,2,3,4,5,6,7,7,8,9);
+        /*扩展*/
+        // console.log(...[4,8]);
+        /*运算符*/
+        let arr1 = [1,2], arr2 = [3,4];
+        // console.log(...arr1, ...arr2);
+        let [x, ...y] = [1,2];
+        console.log(x);
+    </script>
+</body>
+</html>

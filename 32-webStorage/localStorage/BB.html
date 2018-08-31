@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二级页面</title>
+</head>
+<body>
+<h1>二级页面</h1>
+<div>
+    <label for="ipt_txt">输入框：</label>
+    <input id="ipt_txt" type="text">
+</div>
+
+<script>
+    window.onload = function(){
+        var ipt_txt = document.getElementById('ipt_txt');
+        ipt_txt.addEventListener('keyup', function(){
+            localStorage.setItem('val',this.value);
+        });
+    }
+    window.onbeforeunload = function(){
+        localStorage.removeItem('val');
+    }
+</script>
+</body>
+</html>

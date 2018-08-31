@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>节流函数</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    pre{
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+<h3>为何要进行函数节流</h3>
+<pre>函数被频繁调用的场景
+ window.onresize事件。我们给 window 对象绑定了 resize 事件，当浏览器窗口大小被拖动
+而改变的时候，这个事件触发的频率非常之高。如果我们在 window.onresize 事件函数里
+有一些跟 DOM节点相关的操作，而跟 DOM节点相关的操作往往是非常消耗性能的，这
+时候浏览器可能就会吃不消而造成卡顿现象。
+ mousemove事件。同样，如果我们给一个 div节点绑定了拖曳事件（主要是 mousemove） ，当
+div节点被拖动的时候，也会频繁地触发该拖曳事件函数。
+ 上传进度。微云的上传功能使用了公司提供的一个浏览器插件。该浏览器插件在真正开
+始上传文件之前，会对文件进行扫描并随时通知 JavaScript函数，以便在页面中显示当前
+的扫描进度。但该插件通知的频率非常之高，大约一秒钟 10次，很显然我们在页面中不
+需要如此频繁地去提示用户。
+</pre>
+<pre>我们整理上面提到的三个场景，发现它们面临的共同问题是函数被触发的频率太高。
+比如我们在 window.onresize 事件中要打印当前的浏览器窗口大小，在我们通过拖曳来改变
+窗口大小的时候，打印窗口大小的工作 1秒钟进行了 10次。而我们实际上只需要 2次或者 3次。
+这就需要我们按时间段来忽略掉一些事件请求，比如确保在 500ms内只打印一次。很显然，我们
+可以借助setTimeout来完成这件事情。</pre>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+  var throttle = function ( fn, interval ){
+    var self = fn,
+      firstTime = true,
+      timer;
+    return function(){
+      var args = arguments,
+        me = this;
+      if( firstTime ){
+        self.apply( me, args );
+        firstTime = false;
+      }
+      if( timer ){
+        return false;
+      }
+      timer = setTimeout(function(){
+        self.apply( me, args );
+        clearTimeout( timer );
+        timer = null;
+      }, interval || 500 );
+    };
+  };
+
+  window.onresize = throttle( function(){
+    console.log('延时执行了！');
+  }, 2000 );
+
+</script>
+</body>
+</html>

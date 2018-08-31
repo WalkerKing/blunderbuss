@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot学习</title>
+</head>
+<body>
+
+<div id="app">
+    <my-component>
+        <h1>Hello Vue.js </h1>
+    </my-component>
+    <my-component>
+
+    </my-component>
+</div>
+<template id="myComponent">
+    <div class="content">
+        <slot>如果没有内容分发，则显示slot中的内容</slot>
+        <h2>This is a component</h2>
+        <p>Say something</p>
+    </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+    Vue.component('my-component', {
+        template: '#myComponent'
+
+    });
+
+    new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue hello world</title>
+
+</head>
+<body>
+<div id="app">
+    <p v-bind:title="message">{{ message}}</p>
+    <p>{{ message + ' vue'}}</p>
+    <p>{{ message.split('').reverse().join('')}}</p>
+    <input v-model="message" title="" type="text">
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    var dataModel = {
+        message: 'hello world!' + new Date().toLocaleString()
+    };
+    new Vue({
+        el: '#app',
+        data: dataModel
+    });
+</script>
+</body>
+</html>

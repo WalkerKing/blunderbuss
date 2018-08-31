@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+</head>
+<body>
+
+<canvas id="c1" width="1600" height="1000"></canvas>
+<script>
+    var ctx = document.getElementById('c1').getContext('2d');
+//    ctx.fillStyle = '#0000ff';
+//    ctx.fillRect( 20, 20, 150, 200 );
+    ctx.font = "30px Microsoft YaHei";
+    var gradient = ctx.createLinearGradient(0, 0, document.getElementById('c1').width, 0);
+    gradient.addColorStop('0', 'magenta');
+    gradient.addColorStop('0.5', 'blue');
+    gradient.addColorStop('1', 'red');
+    ctx.strokeStyle = gradient;
+    ctx.strokeText('Fuck the world if you are rich ,otherwise fuck yourself !!', 10, 50);
+    function drawImage(){
+        var img = new Image();
+        img.src='image.png';
+        img.onload = function(){
+            ctx.drawImage(img, 0, 0);
+        };
+    }
+    drawImage();
+</script>
+</body>
+</html>

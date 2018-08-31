@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>单例模式</title>
+</head>
+<body>
+
+
+<script>
+
+//  不透明的单例
+  var singleTon = function(){
+    this.name = 'hanmeimei';
+    this.instance = null;
+  };
+  singleTon.getInstance = function(){
+    return this.instance || (this.instance = new singleTon());
+  };
+  var a = singleTon.getInstance();
+  var b = singleTon.getInstance();
+  console.log( a === b );
+  //  透明的单例
+  var CreateDiv = (function(){
+    var instance = null;
+    return function(html){
+      if( instance ){
+        return instance ;
+      }
+    };
+
+  })();
+
+
+
+</script>
+</body>
+</html>

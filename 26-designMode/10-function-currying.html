@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>currying</title>
+</head>
+<body>
+
+
+<script>
+  // 不完全实现currying函数
+  var cost1 = (function(){
+    var arr = [];
+    return function(){
+      var money = 0;
+//      debugger;
+      if(arguments.length === 0){
+        for(var i = 0, l = arr.length; i < l; i++){
+          money += arr[ i ];
+        }
+        return money;
+      }else{
+        [].push.apply( arr , arguments );
+        console.log(arr );
+      }
+    }
+  })();
+//  cost1(100);
+//  cost1(120);
+//  cost1(110);
+//  cost1(100);
+//  console.log( cost1() );
+
+  //  完全实现currying函数
+  var currying = function( fn ){
+    var arr = [];
+    return function(){
+      if( arguments.length === 0 ){
+        return fn.apply( this, arr );
+      }else{
+        [].push.apply( arr, arguments );
+        return arguments.callee;  //  使用return返回fn的执行结果
+      }
+    };
+  };
+  var cost2 = function(){
+    var money = 0;
+    for(var i = 0, l = arguments.length; i < l; i ++ ){
+      money += arguments[ i ];
+    }
+    return money;
+//    console.log( money );
+  };
+  cost2 = currying( cost2 );
+
+  cost2(2);
+  cost2(3);
+  console.log(cost2(4));
+
+
+</script>
+</body>
+</html>

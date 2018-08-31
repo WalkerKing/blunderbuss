@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+    <h1>中介者模式</h1>
+    <ul>
+        <li>泡泡糖游戏</li>
+        <li>除了中介者本身，没有一个玩家知道其他任何玩家的存在，玩家与玩家之间的耦
+            合关系已经完全解除，某个玩家的任何操作都不需要通知其他玩家，而只需要给中介者发送一个
+            消息，中介者处理完消息之后会把处理结果反馈给其他的玩家对象。我们还可以继续给中介者扩
+            展更多功能，以适应游戏需求的不断变化。 </li>
+    </ul>
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+    $(function(){
+        var paoPaoTang = function(){
+            var Player = function( name, teamColor ){
+                this.name = name;
+                this.teamColor = teamColor;
+                this.state = 'alive';
+            };
+            Player.prototype.win = function(){
+                console.log( this.name + 'won!' );
+            };
+            Player.prototype.lose = function(){
+                console.log( this.name + 'lost' );
+            };
+            Player.prototype.die = function(){
+                this.state = 'dead';
+                playerDirector.receiveMsg( 'playerDead', this );
+            };
+            Player.prototype.remove = function(){
+                playerDirector.receiveMsg( 'removePlayer', this );
+            };
+            Player.prototype.changeTeam = function( color ){
+                playerDirector.receiveMsg( 'changeTeam', this, color );
+            };
+            var playerFactory = function( name, teamColor ){
+                var newPlayer = new Player( name, teamColor );
+                playerDirector.receiveMsg('addPlayer', newPlayer);
+                return newPlayer;
+            };
+            var playerDirector = (function(){
+                var players = {},
+                    operations = {};
+                operations.addPlayer = function( player ){
+                    var teamColor = player.teamColor;
+                    players[ teamColor ] = players[ teamColor ] || [];
+                    players[ teamColor ].push( player );
+                };
+                operations.removePlayer = function( player ){
+                    var teamColor = player.teamColor,
+                        teamPlayers = players[ teamColor ] || [];
+                    for( var i = teamPlayers.length - 1; i >= 0; i--){
+                        if( teamPlayers[ i ] === player ){
+                            teamPlayers.splice( i, 1 );
+                        }
+                    }
+                };
+                operations.changeTeam = function( player, newTeamColor ){
+                    operations.removePlayer( player );
+                    player.teamColor = newTeamColor;
+                    operations.addPlayer( player );
+                };
+                operations.playerDead = function( player ){
+                    var teamColor = player.teamColor,
+                        teamPlayers = players[ teamColor ];
+                    var all_dead = true;
+                    for( var i = 0, player; player = teamPlayers[ i++ ]; ){
+                        if( player.state !== 'dead'){
+                            all_dead = false;
+                            break;
+                        }
+                    }
+                    if( all_dead ){
+                        for( var i = 0, player; player = teamPlayers[ i++ ]; ){
+                            player.lose();
+                        }
+                        for( var color in players ){
+                            if( color !== teamColor ){
+                                var teamPlayers = players[ color ];
+                                for( var i = 0, player; player = teamPlayers[ i++ ]; ){
+                                    player.win();
+                                }
+                            }
+                        }
+                    }
+                };
+                var receiveMsg = function(){
+                    var msg = [].shift.call( arguments );
+                    operations[ msg ].apply( this, arguments );
+                };
+                return {
+                    receiveMsg: receiveMsg
+                }
+            })();
+            var player1 = playerFactory( '皮蛋', 'red' ),
+                player2 = playerFactory( '小乖', 'red' ),
+                player3 = playerFactory( '宝宝', 'red' ),
+                player4 = playerFactory( '小强', 'red' );
+            var player5 = playerFactory( '黑妞', 'blue' ),
+                player6 = playerFactory( '葱头', 'blue' ),
+                player7 = playerFactory( '胖墩', 'blue' ),
+                player8 = playerFactory( '海盗', 'blue' );
+            player1.die();
+            player2.die();
+            player3.die();
+            player4.die();
+        };
+//        paoPaoTang();
+        var goShopping = function(){
+
+        };
+    });
+</script>
+</body>
+</html>

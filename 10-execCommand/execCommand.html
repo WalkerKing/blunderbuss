@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+	<input type=button value=剪切 onclick=document.execCommand('Cut')>
+	<input type=button value=拷贝 onclick=document.execCommand('Copy')>
+	<input type=button value=粘贴 onclick=document.execCommand('Paste')>
+	<input type=button value=撤消 onclick=document.execCommand('Undo')>
+	<input type=button value=重做 onclick=document.execCommand('Redo') id=button2 name=button2>
+	<input>
+	<input type=button value=删除 onclick=document.execCommand('Delete')>
+	<input type=button value=黑体 onclick=document.execCommand('Bold')>
+	<input type=button value=斜体 onclick=document.execCommand('Italic')>
+	<input type=button value=下划线 onclick=document.execCommand('Underline')>
+	<input type=button value=停止 onclick=document.execCommand('stop')>
+	<input type=button value=保存 onclick=document.execCommand('SaveAs')>
+	<input type=button value=另存为 onclick=document.execCommand('Saveas',false,'c:\\test.htm')>
+	<input type=button value=字体 onclick=document.execCommand('FontName',false,fn)>
+	<input type=button value=字体大小 onclick=document.execCommand('FontSize',false,fs)>
+	<input type=button value=刷新 onclick=document.execCommand('refresh',false,0)>
+
+<div contenteditable="true" onmouseup="SetToBold ();">选择文本加粗，放开文本不加粗，哈哈哈，haorooms</div>
+
+  <script src="../common/jquery-1.12.4.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+  <script>
+	function SetToBold () {
+        document.execCommand ('bold', false, null);
+    }
+  </script>
+</body>
+</html>

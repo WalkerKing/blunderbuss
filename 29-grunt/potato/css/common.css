@@ -1,0 +1,156 @@
+/*reset*/
+body{
+    font:14px '宋体',"Microsoft yahei",Arial,Helvetica,sans-serif;
+    color:#666;
+    margin:0;
+    padding:0;
+}
+ul,ol,li,p{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+a{
+    color:#666;
+    text-decoration:none;
+}
+a:hover{
+    color:#666;
+    text-decoration:underline;
+}
+/*兼容IE&FF*/
+a:hover,
+a:visited,
+a:focus{
+    outline-style: none;
+}
+input {
+    border:1px solid #d2d2d2;
+}
+/*兼容IE*/
+input::-ms-clear{
+    display:none;
+}
+/*reset结束*/
+/*去掉bootstrap中按钮默认的outline*/
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+}
+.btn {
+    padding: 0;
+}
+.form-control{
+    color:#666;
+    margin-bottom:27px;
+}
+.btnbg,.btnbg:hover,.btnbg:focus{
+    background-color:#666;
+    border-radius:10px;
+    font-size:24px;
+    color:#fff;
+}
+/*封装组件 可选区域----*/
+.searchLi>li {
+    display:inline-block;
+    margin:14px 50px 14px 0;
+    height:30px;
+    line-height:30px;
+}
+.searchLi>li:nth-child(1) {
+    margin-right:80px;
+    color:#333;
+    font-weight:bold;
+}
+.searchLi>li>a {
+    display:inline-block;
+    color:#666;
+    width:130px;
+    text-align:center;
+}
+.searchLi>li.checked {
+    background-color:#666;
+    border-radius:10px;
+}
+.searchLi>li.checked>a{
+    color:#fff;
+}
+/*组件封装结束-----*/
+
+/*封装组件 顶部导航 */
+
+.header {
+    width:1800px;
+    margin:0 auto;
+    height:58px;
+}
+.header>a.markorLogo {
+    float:left;
+    margin-top:11px;
+}
+.header>ul {
+    float:right;
+    line-height:58px;
+}
+.header>ul>li {
+    float:left;
+    line-height:58px;
+}
+.header>ul>li>i {
+    display:inline-block;
+    width:22px; height:22px;
+    vertical-align: middle;
+    line-height: 58px;
+    margin-left:15px;
+}
+.header>ul>li>a {
+    padding:3px 15px 3px 10px;
+    border-right:1px solid #666;
+}
+.header>ul>li:nth-child(1)>i {
+    background:url(../src/img/collection_icon.png) no-repeat -40px -40px;
+}
+.header>ul>li:nth-child(2)>i {
+    background:url(../src/img/list_icon.png) no-repeat -40px -40px;
+}
+.header>ul>li:nth-child(3)>a {
+    padding-left:15px;
+}
+.header>ul>li:last-child>a {
+    padding-left:15px;
+    padding-right:0;
+    border-right:none;
+}
+/*顶部导航 封装结束*/
+nav>div.blank {
+    width:1800px; height:40px;
+    margin:0 auto;
+    color:#000;
+    background-color: #fff;
+}
+.breadcrumb {
+    display:inline-block;
+    padding:0;
+    background-color:transparent;
+    margin-bottom:0;
+}
+nav>div.blank>span {
+    line-height: 40px;
+}
+.breadcrumb > li + li:before {
+    content:"";
+    display:inline-block;
+    width: 14px; height: 19px;
+    background:url(../src/img/breadcrumb.png) no-repeat -46px -36px;
+}
+nav>div.blank>.breadcrumb>li>a {
+    color:#000;
+}
+.breadcrumb > .active{
+    color:#000;
+}
+

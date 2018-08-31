@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>基于BOOTSTRAP的HTML模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+  <!--[if lt IE 9]>
+  <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+  <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    input[type=file] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<label class="label label-success" for="fileUpload">请上传文件</label>
+<input id="fileUpload" type="file">
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="papaparse.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+  $(function(){
+    var completeCB = function( results, file ){
+
+      console.log(results);
+
+      for(var i = 0, len = results['data'].length; i < Math.min( 100, len ); i++ ){
+        console.log(results['data'][i]);
+      }
+//      console.log(obj);
+    };
+    var config = {
+      delimiter: "",	// auto-detect
+      newline: "",	// auto-detect
+      header: false,  // 没有表头
+      dynamicTyping: false,   //  是否自动转换类型，bool和数字
+      preview: 0,   //  显示多少行，0代表全部显示
+      encoding: "",
+      worker: false,  //  是否启用worker线程
+      comments: '',   //  注释符号(for example, "#" or "//").
+      step: undefined,  //
+      complete: completeCB,   //  转换完成的回调
+      error: undefined,   //  FileReader encounters an error.
+      download: false,    //  如果是true，需要给parse的第一个参数设置为url
+      skipEmptyLines: true, //  设置为true，如果该行完全为空，则跳过
+      chunk: undefined,
+      fastMode: undefined,
+      beforeFirstChunk: undefined,
+      withCredentials: undefined
+    };
+
+
+    $('#fileUpload').change(function(){
+      Papa.parse( $('#fileUpload')[0].files[0], config );
+    });
+
+  });
+
+
+</script>
+</body>
+</html>

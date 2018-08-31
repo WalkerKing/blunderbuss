@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件自定义事件</title>
+</head>
+<body>
+
+<div id="counter-event-example">
+    <p>{{ total }}</p>
+    <button-counter v-on:increment="incrementTotal"></button-counter>
+    <button-counter v-on:increment="incrementTotal"></button-counter>
+</div>
+<div id="currency-input">
+    <currency-input></currency-input>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    Vue.component('currency-input', {
+        template: '<span>' +
+            '$' +
+            '<input v-bind:value="value"' +
+            'v-on:input="updateValue($event.target.value)"' +
+            '>' +
+            '</span>',
+        props: [ 'value' ],
+        methods: {
+            updateValue: function(){
+                var formattedValue = value.trim().slice( 0, value.indexOf('.') + 3);
+                if( formattedValue !== value ){
+                    this.$refs.input.value = formattedValue;
+                }
+                this.$emit( 'input', Number(formattedValue) );
+            }
+        }
+    });
+    var currency_input = new Vue({
+        el: 'currency-input',
+        data: {
+            value: 0
+        }
+    });
+    Vue.component('button-counter', {
+        template: '<button v-on:click="increment">{{ counter }}</button>',
+        data: function(){
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            increment: function(){
+                this.counter++;
+                this.$emit('increment');
+            }
+        }
+    });
+    var counter_event_example = new Vue({
+        el: '#counter-event-example',
+        data: {
+            total: 0
+        },
+        methods: {
+            incrementTotal: function(){
+                this.total += 2;
+            }
+        }
+    });
+</script>
+</body>
+</html>

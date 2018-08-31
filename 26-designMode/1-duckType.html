@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>基于BOOTSTRAP的HTML模板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../bootstrap-3.3.6/dist/css/bootstrap.css"/>
+    <!--[if lt IE 9]>
+    <script src="../bootstrap-3.3.6/dist/js/html5shiv.min.js"></script>
+    <script src="../bootstrap-3.3.6/dist/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+<script src="../common/jquery-1.12.4.js"></script>
+<script src="../bootstrap-3.3.6/dist/js/bootstrap.js"></script>
+<script>
+//    鸭子类型
+    var duck = {
+        duckSinging: function(){
+            console.log( '嘎嘎嘎' );
+        }
+    };
+    var chicken = {
+        duckSinging: function(){
+            console.log( '嘎嘎嘎' );
+        }
+    };
+    var choir = []; // 合唱团
+    var joinChoir = function( animal ){
+        if ( animal && typeof animal.duckSinging === 'function' ){
+            choir.push( animal );
+            console.log( '恭喜加入合唱团' );
+            console.log( '合唱团已有成员数量:' + choir.length );
+        }
+    };
+    joinChoir( duck ); // 恭喜加入合唱团
+    joinChoir( chicken ); // 恭喜加入合唱团
+</script>
+</body>
+</html>

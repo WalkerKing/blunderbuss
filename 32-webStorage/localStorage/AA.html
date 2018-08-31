@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页面</title>
+</head>
+<body>
+<h1>主页面</h1>
+<div>
+    <label for="show_txt">二级页面的输入为：</label>
+    <input id="show_txt" type="text">
+</div>
+
+
+<script>
+    window.onstorage = function(){
+        var show_txt = document.getElementById('show_txt');
+        show_txt.value = localStorage.getItem('val');
+    }
+
+</script>
+</body>
+</html>

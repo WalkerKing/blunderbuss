@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件化应用构建</title>
+</head>
+<body>
+    <div id="example-2">
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+    </div>
+
+
+<script src="../js/vue.min.js"></script>
+<script>
+    Vue.component('simple-counter', {
+        template: '<button v-on:click=" counter++ ">{{ counter }}</button>',
+        data: function(){
+            return { counter: 0 };
+        }
+    });
+    var vm = new Vue({
+        el: '#example-2'
+    });
+</script>
+</body>
+</html>

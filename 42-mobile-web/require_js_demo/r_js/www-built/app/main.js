@@ -1,0 +1,1 @@
+define(["require","./messages","print"],function(e){var t=e("./messages"),n=e("print");n(t.getHello())});
