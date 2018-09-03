@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>webuploader</title>
     <!--引入CSS-->
-    <link rel="stylesheet" type="text/css" href="webuploader-master/dist/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="dist/webuploader.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!--引入JS-->
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="webuploader-master/dist/webuploader.js"></script>
+    <script type="text/javascript" src="dist/webuploader.js"></script>
 
     <!--SWF在初始化的时候指定，在后面将展示-->
 
@@ -32,7 +34,7 @@
         swf: 'http://cdn.staticfile.org/webuploader/0.1.0/Uploader.swf',
 
         // 文件接收服务端。
-        server: 'http://webuploader.duapp.com/server/fileupload.php',
+        server: '/',
 
         // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -79,6 +81,9 @@
         $( '#'+file.id ).find('.progress').fadeOut();
     });
 
+    $('#ctlBtn').click(function () {
+        uploader.upload();
+    });
 
 </script>
 </body>
