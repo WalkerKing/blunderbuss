@@ -1,0 +1,27 @@
+{
+  "name": "dev-template",
+  "version": "1.0.0",
+  "description": "项目启动模板",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp --env development",
+    "prod": "gulp --env production"
+  },
+  "author": "WalkerKing",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^7.1.2",
+    "gulp-rev-collector": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^4.3.11",
+    "jshint": "^2.9.5",
+    "pump": "^1.0.2",
+    "run-sequence": "^2.2.0",
+    "gulp-connect": "^5.6.1"
+  }
+}
