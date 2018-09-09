@@ -1,0 +1,49 @@
+> 选库语句
+```
+use 库名;
+```
+如果不知道有哪些库，可以用
+```
+show databases;
+```
+当选过库之后，面对表
+查看库下面所有的表
+```
+show tables;
+```
+创建数据库
+```
+create database 数据库名 [charset utf8]
+```
+删除数据库
+```
+drop database 数据库名;
+```
+数据库改名
+mysql中，表/列可以改名，database不能改名
+
+> 表
+建表
+```
+create 
+```
+删除表
+```
+drop table 表名;
+```
+改表名
+```
+rename table admin_user to admin;
+```
+增加表数据
+```
+insert into 
+
+```
+清空表数据
+```
+truncate 表名;
+```
+truncate 与 delete的区别:
+truncate 是删除一个表再重建,操作之后获得一张全新的表，delete 是从删除所有数据层面上操作，删除之后自增索引的影响还在，如果决定全清空，truncate速度更快.
+

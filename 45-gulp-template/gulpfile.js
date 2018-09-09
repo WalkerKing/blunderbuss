@@ -25,11 +25,11 @@ gulp.task('watch', function () {
 });
 
 //检查js语法
-gulp.task('jslint', function () {
-    return gulp.src(jsSrc)
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
-});
+// gulp.task('jslint', function () {
+//     return gulp.src(jsSrc)
+//         .pipe(jshint())
+//         .pipe(jshint.reporter('default'));
+// });
 
 //清空目标文件
 gulp.task('cleanDst', function () {
@@ -97,10 +97,9 @@ gulp.task('reload', function () {
 
 //开发构建
 gulp.task('dev', function (done) {
-    console.log('run dev');
     condition = false;
     runSequence(
-        ['jslint'],
+        // ['jslint'],
         ['cleanDst'],
         ['revCss'],
         ['revJs'],
@@ -109,6 +108,8 @@ gulp.task('dev', function (done) {
         ['watch'],
         done);
 });
+
+
 
 gulp.task('default', ['dev', 'webserver']);
 
