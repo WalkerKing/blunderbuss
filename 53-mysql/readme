@@ -47,3 +47,17 @@ truncate 表名;
 truncate 与 delete的区别:
 truncate 是删除一个表再重建,操作之后获得一张全新的表，delete 是从删除所有数据层面上操作，删除之后自增索引的影响还在，如果决定全清空，truncate速度更快.
 
+查看表结构
+```
+desc admin_user;
+```
+插入行
+```
+insert into admin_user ( user_name, password) values ( 'abc', '123456')
+```
+字段要严格对应
+插入多行
+```
+insert into admin_user (user_name, password) values ('ab', '123ab'), ('ac', '123ac'), ('bc', '123bc');
+```
+
