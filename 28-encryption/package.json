@@ -1,0 +1,17 @@
+{
+  "name": "28-encryption",
+  "version": "1.0.0",
+  "description": "- 该项目为实验js是否可以实现混淆加密而开立 - 内容参考： - http://div.io/topic/1220 - http://utf-8.jp/public/aaencode.html - http://utf-8.jp/public/jjencode.html - https://www.zhihu.com/question/28468459",
+  "main": "aes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "aes": "^0.1.0",
+    "aes-js": "^3.1.1",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.6.1"
+  }
+}

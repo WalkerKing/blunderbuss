@@ -51,7 +51,7 @@ truncate 是删除一个表再重建,操作之后获得一张全新的表，dele
 ```
 desc admin_user;
 ```
-插入行
+插入行（那张表，哪些列，哪些值）
 ```
 insert into admin_user ( user_name, password) values ( 'abc', '123456')
 ```
@@ -60,4 +60,28 @@ insert into admin_user ( user_name, password) values ( 'abc', '123456')
 ```
 insert into admin_user (user_name, password) values ('ab', '123ab'), ('ac', '123ac'), ('bc', '123bc');
 ```
-
+插入所有列
+如果插入所有列，可以不声明待插入列，即，如果不声明插入的列，则理解依次插入所有列。
+```
+insert into admin_user values (null, '', )
+# 列与值必须一一对应
+```
+修改行（哪张表，哪些列，哪些值，哪些行生效）
+```
+update 表名 set 列1 = 新值1, 列2 = 新值2 where id = ?
+# where后面跟表达式，如果表达式为真，则语句生效
+```
+# 删除行
+```
+delete from 表名 where expression;
+```
+> 建表
+建表的主要知识点是列类型
+存储同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是列类型的意义。
+mysql三个列类型
+数值型
+- 整型
+	- Tinyint
+		占据空间：一个字节
+		春促范围：-128 —— 127，0 —— 255
+- 浮点型/定点型
