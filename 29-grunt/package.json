@@ -2,8 +2,8 @@
   "name": "grunt-test",
   "version": "0.0.1",
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-contrib-uglify": "^2.0.0",
+    "grunt": "^1.0.3",
+    "grunt-contrib-uglify": "^4.0.0",
     "grunt-css-sprite": "^0.2.2",
     "pngsmith": "^0.1.5"
   }
