@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>angular双向绑定原理--脏检测</title>
+</head>
+
+<body>
+<h3>为什么叫脏检查？对脏数据的检查就是脏检查，比较ui和后台的数据是否一致。（数据到界面的呈现则是由脏检查来做）</h3>
+<div>angular通过检查脏数据来进行view层操作更新，脏数据检测的基本原理viewmodel对象的某个属性值发生变化时候找到和这个属性值相关的所有元素，然后再比较数据变化，如果变化则进行directive指令调用， 对这个元素进行重新扫描渲染。
+</div>
+<br>
+通过轮询的方式检测数据变动，特定的事件触发时进入脏值检测
+<input type="text" qq-event="value" qq-bind="value" id="input">
+<span qq-event="text" qq-bind="value" id="el"></span>
+<script>
+    let elems = [document.getElementById("el"), document.getElementById("input")];
+    let data = {
+        value: 'hello'
+    }
+    //定义directive
+    let directive = {
+        text: function (str) {
+            this.innerHTML = str;
+        },
+        value: function (str) {
+            this.setAttribute('value', str)
+        }
+    };
+    //初始化扫描节点
+    scan(elems);
+    $digest('value');
+    // 输入框数据绑定监听
+    if (document.addEventListener) {
+        elems[1].addEventListener('keyup', function (e) {
+            data.value = e.target.value;
+            $digest(e.target.getAttribute('qq-bind'))
+        }, false);
+    } else {
+        elems[1].attachEvent('onkeyup', function (e) {
+            data.value = e.target.value;
+            $digest(e.target.getAttribute('qq-bind'))
+        }, false)
+    }
+    
+    
+    function scan(elems){
+        //扫描带指令的节点属性
+        for(let elem of elems){
+            elem.directive=[]
+        }
+    }
+    //可以理解为数据劫持监听
+    function $digest(value){
+        let list=document.querySelectorAll('[qq-bind='+value+']');//获取所有含qq-bind的dom节点
+        digest(list)
+    }
+    //脏数据循环检测
+    function digest(elems){
+        for(let i=0,len=elems.length;i<len;i++){
+            let elem=elems[i];
+            for(let j=0,len1=elem.attributes.length;j<len1;j++){
+                let attr=elem.attributes[j];
+                if(attr.nodeName.indexOf('qq-event')>=0){
+                    //调用属性指令
+                    let dataKey=elem.getAttribute('qq-bind')||undefined;
+                    //进行脏数据检测，如果数据改变，则重新执行指令，否则跳过
+                    if(elem.directive[attr.nodeValue]!==data[dataKey]){
+                        directive[attr.nodeValue].call(elem,data[dataKey]);
+                        elem.directive[attr.nodeValue]=data[dataKey];
+                    }
+                }
+            }
+        }
+        
+    }
+</script>
+</body>
+
+</html>
