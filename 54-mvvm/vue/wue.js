@@ -8,7 +8,7 @@
     Wue.prototype={
         constructor:Wue,
         init:function(){
-             this.bindText();
+             this.bindText(); 
              this.bindModel();
         },
         defineObj:function(obj,prop,value){
