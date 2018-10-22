@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
 
 app.get('/login', function (req, res) {
     req.session.userinfo = 'shanghai';
-    res.send('登录成功')
+    res.send('登录成功');
 });
 
 app.listen(3000, '127.0.0.1');

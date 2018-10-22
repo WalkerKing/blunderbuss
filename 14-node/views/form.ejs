@@ -1,25 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>from</title>
+    <style>
+        .progress{
+            width: 200px;
+        }
+        .step {
+            background: rgb(137, 170, 123);
+            height: 40px;
+            width: 0;
+        }
+    </style>
 </head>
-<body>
-<%- include('./partials/header') -%>
-<h1><%= data.age %></h1>
-<h2>hobbies</h2>
-<ul>
-    <% data.hobbies.forEach(function (item) { %>
-            <li>
-                <%= item %>
-            </li>
-    <% }) %>
 
-</ul>
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <h2>单图上传</h2>
-    <input type="file" name="avatar">
-    <input type="submit" value="提交">
-</form>
+<body>
+    <%- include('./partials/header') -%>
+    <h1>
+        <%= data.age %>
+    </h1>
+    <h2>hobbies</h2>
+    <ul>
+        <% data.hobbies.forEach(function (item) { %>
+        <li>
+            <%= item %>
+        </li>
+        <% }) %>
+
+    </ul>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <h2>单图上传</h2>
+        <input type="file" name="avatar" id="pic_upload">
+        <div class="progress">
+            <div class="step"></div>
+        </div>
+        <input type="submit" value="提交">
+    </form>
+
+    <script>
+        window.onload = function () {
+            document.getElementById('pic_upload').addEventListener('change', function (e) {
+                var data = new FormData();
+                data.append('avatar', e.target.files[0]);
+                var xhr = new XMLHttpRequest();
+                
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        console.log(xhr.responseText);
+                    }
+                }
+
+                xhr.upload.onprogress = function (e) {
+                    //  console.log(event);
+                    var percent = Math.floor(e.loaded / e.total * 100) + '%';
+
+                    // 设置 进度条内部step的 宽度
+                    var step = document.querySelector('.step')
+                    step.innerHTML = percent;
+                    step.style.width = percent;
+                }
+                xhr.open('post', '/upload', true);
+                xhr.send(data);
+            })
+        }
+    </script>
 </body>
+
 </html>
