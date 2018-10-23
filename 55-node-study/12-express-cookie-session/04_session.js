@@ -27,5 +27,13 @@ app.get('/login', function (req, res) {
     res.send('登录成功');
 });
 
+app.get('/logout', function (req, res) {
+    // req.session.userinfo.maxAge = 0; // 设置cookie过期时间为0，来清除session
+    req.session.destroy(function () {
+        console.log('退出登录成功');
+    });
+    res.send('退出登录成功');
+});
+
 app.listen(3000, '127.0.0.1');
 console.log('Server run at http://127.0.0.1:3000');
