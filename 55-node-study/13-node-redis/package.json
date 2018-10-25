@@ -1,0 +1,15 @@
+{
+  "name": "13-node-redis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node app"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "redis": "^2.8.0"
+  }
+}
