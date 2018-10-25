@@ -9,14 +9,14 @@ app.use(session({
     saveUninitialized: true, //强制将未初始化的session存储，默认值是true，建议true
     cookie: { 
         secure: false,  // https的情况才可以访问cookie
-        maxAge: 30*1000 //设置session失效时间
+        maxAge: 30*60*1000 //设置session失效时间
     },
     rolling: true  //如果用户一直访问浏览器页面，30s没有动作才清楚cookie
 }));
 
 app.get('/', function (req, res) {
     if(req.session.userinfo){
-        res.send(req.session.userinfo);
+        res.send(`Welcome ${req.session.userinfo}`);
     }else{
         res.send('请您登录');
     }
