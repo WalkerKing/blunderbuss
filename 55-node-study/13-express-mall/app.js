@@ -58,7 +58,8 @@ app.use((req, res, next) => {
             break;
         default:
             //根据session内容判断是否登录
-            if (req.session.userinfo && req.session.userinfo.username !== '') {
+            if (req.session.userinfo && req.session.userinfo.user_name !== '') {
+                app.locals['userinfo']=req.session.userinfo
                 next()
             } else {
                 res.redirect('/login');
@@ -68,8 +69,7 @@ app.use((req, res, next) => {
 
 // 以下为页面路由
 app.get('/', (req, res, next) => {
-    // req.session.destroy();
-    // res.render('index');
+    res.render('/product');
     next()
 });
 
@@ -127,14 +127,47 @@ app.post('/doLogin', (req, res) => {
         req.session.userinfo = data[0];
         res.redirect('/product');
     }).catch(err => {
+        res.send("<script>alert('" + err.msg + "');location.href='/login'</script>");
         console.log(err);
     })
 });
 
 // 产品列表
 app.get('/product', (req, res) => {
-    res.render('product');
+    getProductList().then(data => {
+        res.render('product', { pList: data });
+    })
 });
+
+const getProductList = () => {
+    return new Promise((resolve, reject) => {
+        let querySql = `select * from product`;
+        pool.getConnection((err, connection) => {
+            if (err) {
+                reject({
+                    code: 104,
+                    msg: 'sql连接出错',
+                    err: err
+                });
+                return;
+            }
+            connection.query(querySql, {}, (error, result) => {
+                connection.release();
+                result = JSON.stringify(result);
+                let data = JSON.parse(result);
+                if (error) {
+                    reject({
+                        code: 101,
+                        msg: 'sql查询出错',
+                        err: err
+                    });
+                    return;
+                }
+                resolve(data);
+            });
+        });
+    })
+}
 
 // 产品新增
 app.get('/product_add', (req, res) => {
@@ -149,13 +182,13 @@ app.get('/product_edit', (req, res) => {
 // 产品编辑
 app.get('/logout', (req, res) => {
     req.session.destroy(err => {
-        if(err){
+        if (err) {
             console.log(err);
-        }else{
+        } else {
             res.redirect('/login');
         }
     })
 });
 
-app.listen('8000', 'localhost');
-console.log('app run at http://localhost:8000');
+app.listen('8000', '127.0.0.1');
+console.log('app run at http://127.0.0.1:8000');
