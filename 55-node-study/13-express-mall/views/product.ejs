@@ -54,9 +54,11 @@
                                 <td>
                                     <%=i+1%>
                                 </td>
-                                <td>图标</td>
                                 <td>
-                                    <%=pList[i].title%>
+                                    <img width="40" src="<%= pList[i].pic %>" alt="">
+                                </td>
+                                <td>
+                                    <%= pList[i].title %>
                                 </td>
                                 <td>
                                     <%=pList[i].price%>
@@ -65,7 +67,10 @@
                                     <%=pList[i].fee%>
                                 </td>
     
-                                <td class="text-center">修改 删除</td>
+                                <td class="text-center">
+                                    <a href="/product-edit?id=<%=pList[i].id%>">修改</a>
+                                    <a href="/product-delete?id=<%=pList[i].id%>">删除</a>
+                                </td>
                             </tr>
                             <%}%>
     
