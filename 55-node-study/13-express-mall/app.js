@@ -31,11 +31,10 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 // 配置静态文件托管
-app.use(express.static('public'));
+app.use(express.static('static'));
 app.use(express.static('uploads'));
 
 app.use(router);
-
 
 app.listen('8000', '127.0.0.1');
 console.log('app run at http://127.0.0.1:8000');

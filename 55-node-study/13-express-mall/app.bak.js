@@ -26,13 +26,7 @@ app.use(session({
     rolling: true,  //如果用户一直访问浏览器页面，30s没有动作才清楚cookie
     store: sessionStore
 }));
-// 用户名密码加密
-const crypto = require('crypto');
-const sha256 = (userName, pwd) => {
-    return crypto.createHmac('sha256', userName + 'suijizifuchuan')
-        .update(pwd)
-        .digest('hex');
-}
+
 
 // 配置body-parser
 const bodyParser = require('body-parser');

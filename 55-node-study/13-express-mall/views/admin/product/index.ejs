@@ -1,10 +1,10 @@
-<%- include public/header.ejs%>
+<%- include ../public/header.ejs%>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
 
-            <%- include public/aside.ejs%>
+            <%- include ../public/aside.ejs%>
 
         </div>
         <div class="col-sm-10">
@@ -43,7 +43,6 @@
                             <th>名称</th>
                             <th>价格</th>
                             <th>邮费</th>
-
                             <th class="text-center">操作</th>
                         </tr>
                     </thead>
@@ -55,7 +54,7 @@
                                     <%=i+1%>
                                 </td>
                                 <td>
-                                    <img width="40" src="<%= pList[i].pic %>" alt="">
+                                    <img width="20" src="<%= pList[i].pic %>" alt="">
                                 </td>
                                 <td>
                                     <%= pList[i].title %>
@@ -68,8 +67,8 @@
                                 </td>
     
                                 <td class="text-center">
-                                    <a href="/product-edit?id=<%=pList[i].id%>">修改</a>
-                                    <a href="/product-delete?id=<%=pList[i].id%>">删除</a>
+                                    <a href="/admin/product/edit?id=<%=pList[i].id%>">修改</a>
+                                    <a href="/admin/product/delete?id=<%=pList[i].id%>">删除</a>
                                 </td>
                             </tr>
                             <%}%>
