@@ -1,0 +1,32 @@
+{
+  "name": "16-node-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test",
+    "test:cover": "istanbul cover _mocha",
+    "dev": "supervisor index"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "config-lite": "^2.1.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-formidable": "https://github.com:utatti/express-formidable.git",
+    "express-session": "^1.15.6",
+    "express-winston": "^3.0.1",
+    "istanbul": "^0.4.5",
+    "marked": "^0.5.1",
+    "mocha": "^5.2.0",
+    "moment": "^2.22.2",
+    "mongolass": "^4.4.0",
+    "objectid-to-timestamp": "^1.3.0",
+    "sha1": "^1.1.1",
+    "supertest": "^3.3.0",
+    "winston": "^3.1.0"
+  }
+}
