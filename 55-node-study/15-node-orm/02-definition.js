@@ -35,7 +35,7 @@ const User = sequelize.define(
         'timestamps': true,
 
         // 不需要createdAt字段
-        'createdAt': true,
+        'createdAt': false,
 
         // 将updatedAt字段改个名
         'updatedAt': 'utime',
@@ -53,27 +53,49 @@ const User = sequelize.define(
 //     console.error('创建表失败');
 //     console.log(err);
 // });
-var user = User.build({
-    'emp_id': '3',
-    'nick': '小红',
-    'department': '技术部'
-});
-user.save().then(ret => {
-    console.log('-------------');
-    console.log(user.get({'plain': true}));
-});
-
-// 方法2：直接操作db
-// var user = yield User.create({
-//     'emp_id': '2',
-//     'nick': '小明',
+// 方法1：build后对象只存在于内存中，调用save后才操作db
+// var user = User.build({
+//     'emp_id': '4',
+//     'nick': '小红',
 //     'department': '技术部'
 // });
-// console.log(user.get({'plain': true}));
-
-// User.findAll().then(users => {
-//     console.log(users);
-// }).catch(err => {
-//     console.error('查询表失败');
-//     console.log(err);
+// user.save().then(ret => {
+//     console.log(user.get({'plain': true}));
 // });
+
+// 方法2：直接操作db
+// User.create({
+//     'emp_id': '8',
+//     'nick': '小明',
+//     'department': '技术部'
+// }).then(ret => {
+//     console.log(ret.get({'plain': true}));
+
+// });
+
+// 更新
+// User.update({department: '商务部'}, {where: {emp_id: 8}}).then(ret => {
+//     return User.findAll()
+// }).then(users => {
+//     // console.log(typeof users);
+// })
+User.findAll({
+    'attributes': [
+        'emp_id', ['nick', 'user_nick']
+    ],
+    where: {
+        'id': [1, 2, 3] 
+    }
+}).then(users => {
+    console.log(users.length);
+    for(let k of users){
+        console.log(k.get({plain: true}));
+    }
+    
+    // a.destroy();  // 软删除
+    // a.destroy({force: true}); //硬删除
+
+}).catch(err => {
+    console.error('查询表失败');
+    console.log(err);
+});
