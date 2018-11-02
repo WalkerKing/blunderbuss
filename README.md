@@ -5,9 +5,9 @@
 - 00 summary，合并整理相同类型的问题
 - 01 bootstrap demo
 - 02 使用ajax调用json，模拟获取到后台数据
-- 03
+- 03 webuploader
 - 04 jquery 动画排队时候的bug，暂无解
-- 05
+- 05 node-fs
 - 06 闭包案例
 - 07 vedio
 - 08 强制不使用cache的研究
@@ -23,9 +23,9 @@
 - 18 滚动条研究
 - 19 侦测页面是否存在
 - 20 get set
-- 21
+- 21 echarts
 - 22 在一个有规律的tree查找指定id的对象
-- 23 浮动框架验证
+- 23 iframe验证
 - 24 事件冒泡
 - 25 lua初识
 - 26 JavaScript设计模式与开发实践
@@ -40,18 +40,22 @@
 - 35 百度地图
 - 36 获取url携带的参数
 - 37 自定义一个表单验证
-- 38 react study
+- 38 
 - 39 web-worker
 - 40 页面重定向
 - 41 vue
 - 42 移动端开发
 - 43 数据结构
 - 44 H5 post message
-- 45 webpack-vue练习
+- 45 gulp项目模板
 - 46 canvas
 - 47 webpack练习
 - 48
 - 49 全景图
-- 50
+- 50 vuex
 - 51 ES6
 - 52 js压缩
+- 53 mysql 学习
+- 54 mvvm 原理研究
+- 55 node 学习
+- 56 mocha测试框架
