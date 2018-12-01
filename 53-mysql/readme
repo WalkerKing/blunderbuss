@@ -1,4 +1,4 @@
-tee /usr/local/mysql.log; 可以将sql及其执行结果输出到一个文件中
+tee /Users/walkerking/test/blunderbuss/53-mysql/log.sql 可以将sql及其执行结果输出到一个文件中
 > 选库语句
 ```
 use 库名;
@@ -100,6 +100,14 @@ varchar 变长字符串
 varchar(100)，也是存储0-100个字符
 varchar(N)，不用空格补齐，但列内容前，有1-2个字节来标示该列的内容长度。
 注意：char(M) varchar(M)中的M都是限定的字符数，不是字节数。
+- text
+文本类型，可以存比较大的文本段，搜索速度稍慢，因此，如果不是特别大的内容，建议用char、varchar来代替
+Text 不用加默认值（加了也没用）
+- blob
+二进制类型，用来存储图像、音频等二进制信息
+意义：2进制 0-255 都有可能出现，blob在于防止因为字符集的问题，导致信息丢失。
+比如：一张图中有0xFF字节，这个在ascii字符集认为非法，在入库的时候被过滤了
+
 
 
 

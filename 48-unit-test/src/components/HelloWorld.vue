@@ -90,6 +90,11 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods: {
+    calSqr (n) {
+      return n * n
+    }
   }
 }
 </script>
