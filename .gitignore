@@ -1,5 +1,6 @@
 .idea/
 .project
+.vscode
 *.mp3
 node_modules/
 dist/
