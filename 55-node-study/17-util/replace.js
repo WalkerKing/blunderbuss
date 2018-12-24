@@ -2,7 +2,7 @@
  * ReplaceFileStr是一个读取文件并将文件中特定字符串进行替换的工具类
  * @param {String} filename 需要读取的文件的绝对路径
  * @param {Array}  replaceArr 需要替换的字符串数组，数组中每一个对象代表一对替换字符串，属性o代表将被替换的字符串，d代表被替换成什么字符串
- * example:
+ * @example:
  * {
  *     {
             o: '../common/jquery-1.12.4.js',
@@ -43,6 +43,7 @@ class ReplaceFileStr {
             let myReadScream = fs.createReadStream(this.filename, { encoding: 'utf8' });
             let myWriteScream = fs.createWriteStream(this.filename + '.bak');
             myReadScream.on('data', chunk => {
+                console.log(chunk);
                 for (let i = 0; i < this.replaceArr.length; i++) {
                     let replaceObj = this.replaceArr[i];
                     let reg = new RegExp(replaceObj.o, 'g')
@@ -107,16 +108,22 @@ let linkArr = [
         d: '//cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.css'
     }
 ]
-// linkArr = [
-//     {
-//         o: '321',
-//         d: '123'
-//     },
-//     {
-//         o: '423',
-//         d: '123'
-//     }
-// ]
+// 将文件中的下划线命名改为驼峰命名
+linkArr = [
+    {
+        o: /(\_)(\w{1})/,
+        d: (function () {
+            var i = 0;
+            return function (arr, a1, a2) {
+                i++;    
+                console.log(i);   
+                return a2.toUpperCase();
+                     
+            }
+        })()
+    }
+]
 
 // replace('/Users/walkerking/test/blunderbuss/09-download-upload/', linkArr)
-// new ReplaceFileStr('/Users/walkerking/test/blunderbuss/55-node-study/17-util/test', linkArr)
+new ReplaceFileStr('/Users/walkerking/test/blunderbuss/55-node-study/17-util/test', linkArr)
+
