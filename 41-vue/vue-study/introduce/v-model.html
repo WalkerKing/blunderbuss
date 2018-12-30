@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现组件v-model</title>
+    <style>
+        .active {
+            background: #f1a417;
+            color: #4c4c4c;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h2>实现组件v-model</h2>
+    <p>{{v}}</p>
+    <custom-input v-bind:val.sync="v"></custom-input>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    Vue.component('custom-input', {
+        props: ['val'],
+        template: `
+            <div>
+            <input
+              v-model="val.a"
+            >
+            <input
+              v-model="val.b"
+            >
+            </div>
+          `
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            v: {
+                a: 'Vue',
+                b: 123
+            }
+        },
+        mounted(){
+            setTimeout(function () {
+                vm.v = {
+                    a: 'vuex',
+                    b: 23
+                }
+            },1000)
+        }
+    });
+</script>
+</body>
+</html>
