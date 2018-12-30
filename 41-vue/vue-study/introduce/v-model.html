@@ -13,14 +13,18 @@
 <body>
 
 <div id="app">
-    <h2>实现组件v-model</h2>
-    <p>{{v}}</p>
-    <custom-input v-bind:val.sync="v"></custom-input>
+    <h2>实现组件v-model 使用sync</h2>
+    <p>{{v1}}</p>
+    <custom-input1 v-bind:val.sync="v1"></custom-input1>
+    <hr>
+    <h2>实现组件v-model 使用update事件显式触发修改</h2>
+    <p>{{v2}}</p>
+    <custom-input2 v-bind:val="v2" v-on:update:val="val=$event"></custom-input2>
 </div>
 
 <script src="../js/vue.js"></script>
 <script>
-    Vue.component('custom-input', {
+    Vue.component('custom-input1', {
         props: ['val'],
         template: `
             <div>
@@ -33,18 +37,42 @@
             </div>
           `
     })
+    Vue.component('custom-input2', {
+        props: ['val'],
+        template: `
+            <div>
+            <input
+              v-model="val.a"
+            >
+            <input
+              v-model="val.b"
+            >
+            </div>
+          `,
+        methods: {
+            
+        }
+    })
     var vm = new Vue({
         el: '#app',
         data: {
-            v: {
+            v1: {
+                a: 'Vue',
+                b: 123
+            },
+            v2: {
                 a: 'Vue',
                 b: 123
             }
         },
         mounted(){
             setTimeout(function () {
-                vm.v = {
+                vm.v1 = {
                     a: 'vuex',
+                    b: 23
+                };
+                vm.v2 = {
+                    a: 'fuck',
                     b: 23
                 }
             },1000)
