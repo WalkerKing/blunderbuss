@@ -15,7 +15,7 @@
 <div id="app">
     <h2>实现组件v-model 使用sync</h2>
     <p>{{v1}}</p>
-    <custom-input1 v-bind:val.sync="v1"></custom-input1>
+    <custom-input1 v-bind:list="list" v-bind:val.sync="v1"></custom-input1>
     <hr>
     <h2>实现组件v-model 使用update事件显式触发修改</h2>
     <p>{{v2}}</p>
@@ -25,12 +25,13 @@
 <script src="../js/vue.js"></script>
 <script>
     Vue.component('custom-input1', {
-        props: ['val'],
+        props: ['val', 'list'],
         template: `
             <div>
             <input
               v-model="val.a"
             >
+            <p v-for="item in list">{{item}}</p>
             <input
               v-model="val.b"
             >
@@ -56,6 +57,7 @@
     var vm = new Vue({
         el: '#app',
         data: {
+            list: [1,2,3],
             v1: {
                 a: 'Vue',
                 b: 123
