@@ -1,12 +1,18 @@
 import React from 'react';
+import Hobby from './hobby.jsx';
 
 export default class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            liked: 0
+            liked: 0,
+            hobbies: [
+                'skateboarding',
+                'rock music'
+            ]
         }
         this.likedCallback = this.likedCallback.bind(this);
+        this.addHobbyCallback = this.addHobbyCallback.bind(this);
 
     }
     likedCallback() {
@@ -16,6 +22,19 @@ export default class Profile extends React.Component {
             liked
         });
     }
+    addHobbyCallback() {
+        let hobbyInput = this.refs.hobby;
+        let val = hobbyInput.value;
+        if(val){
+            let hobbies = this.state.hobbies;
+            hobbies.push(val);
+            this.setState({
+                hobbies
+            }, () => {
+                hobbyInput.value = '';
+            });
+        }
+    }
     render() {
         return (
             <div className="profile-component">
@@ -23,6 +42,11 @@ export default class Profile extends React.Component {
                 <h2>我今年 {this.props.age} 岁</h2>
                 <button onClick={this.likedCallback}>点赞</button>
                 <h2>总点赞数： {this.state.liked}</h2>
+                <ul>
+                    {this.state.hobbies.map((hobby, i) => <Hobby key={i} hobby={hobby}></Hobby>)}
+                </ul>
+                <input type="text" ref="hobby" />
+                <button onClick={this.addHobbyCallback}>添加爱好</button>
             </div>
         )
     }

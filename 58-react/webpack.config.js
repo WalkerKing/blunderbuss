@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'app');
 const BUILD_PATH = path.resolve(ROOT_PATH, 'build');
-
 module.exports = {
     mode: 'development',
     entry: path.resolve(APP_PATH, 'index.jsx'),
@@ -31,6 +30,9 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         hot: true
+    },
+    optimization: {
+        minimizer: [new UglifyJsPlugin()],
     },
     plugins: [
         new HtmlWebpackPlugin(),
