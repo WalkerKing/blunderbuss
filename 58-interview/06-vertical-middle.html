@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .parent {
+            width: 800px;
+            height: 500px;
+            background: #eee;
+            display: table-cell;
+            vertical-align: middle;
+
+        }
+        
+        .son {
+            width: 200px;
+            height: 200px;
+            background: #e4393c;
+        }
+        /* .parent {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .son {
+
+        } */
+
+        /* .parent {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .son {
+            display: inline-block;
+        } */
+
+        /* .son {
+            line-height: 200px;
+        }
+        .son span{
+            display: inline-block;
+            line-height: 20px;
+            vertical-align: middle;
+        }   */
+        .son {
+            display: table-cell;
+            vertical-align: middle;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="son">
+            <span>测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字</span>
+        </div>
+    </div>
+</body>
+</html>
