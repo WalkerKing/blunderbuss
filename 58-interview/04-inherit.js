@@ -89,15 +89,76 @@ Object.getPrototypeOf(p).id = '123'
 
 // 使用es6的class
 class P2 {
-    constructor (name) {
+    constructor(name) {
         this.name = name;
     }
-    
-    getName () {
+
+    getName() {
         console.log(`My name is ${this.name}`);
     }
 }
 let p3 = new P2('王五')
 p3.getName();
 
+console.log('----------分割线,以下是7.1补充---所谓的圣杯模式-----------')
 
+// 所谓的圣杯模式
+const inherit = function (c, p) {
+    let F = function () { };
+    F.prototype = p.prototype;
+    c.prototype = new F();
+    c.prototype.constructor = c;
+    c.uber = p.prototype;
+}
+let P4 = function () {
+    this.pName = 123;
+}
+P4.prototype.getName = function () {
+    console.log(this.pName)
+}
+let C4 = function () {
+    this.cName = 123;
+}
+
+inherit(C4, P4)
+let c4 = new C4();
+// console.log(c4.__proto__.__proto__ === P4.prototype)
+
+// class extends 语法糖
+
+class Parent {
+    constructor(name) {
+        this.name = name;
+        
+    }
+    static asyHello() {
+        console.log(this.name)
+    }
+}
+
+class Child extends Parent {
+    constructor(name, age) {
+        super(name);
+        this.age = age;
+    }
+    sayHello() {
+        console.log(this.age)
+        return this.age;
+    }
+}
+
+let parent = new Parent("Parent")
+let child = new Child("Child", 18)
+child.sayHello()
+
+const fs = require('fs')
+const path = require('path')
+console.log(__dirname)
+fs.readdirSync(__dirname).reduce((entries, dir) => {
+    const fullDir = path.join(__dirname, dir)
+    const entry = path.join(fullDir, 'app.ts')
+    console.log(entry)
+    if(fs.statSync(fullDir).isDirectory() && fs.existsSync(entry)) {
+        
+    }
+}, {})

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #d1 {
+            width: 100px;
+            height: 500px;
+            transition: all 2s;
+            transition-timing-function: ease;
+            transition-delay: 1s;
+            background: #543110;
+        }
+        #d2 {
+            transform: rotate(10deg);
+            margin: 50px;
+            width: 200px;
+            height: 200px;
+            background: #987654; 
+        }
+    </style>
+</head>
+<body>
+   
+    
+
+    <div id="d1"></div>
+
+    <button id="btn">click</button>
+    
+    <div id="d2"></div>
+    <script>
+    
+    document.getElementById('btn').addEventListener('click', function() {
+        d1.style.width = '500px'
+        d1.style.height = '100px'
+    })
+    document.getElementById('d1').addEventListener('transitionend', function() {
+        console.log('动画执行完毕')
+    })
+
+    let rotate = 10;
+    setInterval(() => {
+        rotate+=0.1;
+        d2.style.transform = 'rotate('+ (rotate) +'deg)'
+    }, 2);
+    </script>
+</body>
+</html>

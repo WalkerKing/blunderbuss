@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+            border: 2px dotted  #e4393c;
+            display: inline-block;
+            float: left;
+        }
+        #container2 {
+            border: 2px dotted #876543;
+
+        }
+        #container2 div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #faa;
+        }
+
+        #container::after {
+            content: '';
+            display: block;
+        }
+        #container div {
+            width: 200px;
+            height: 200px;
+        }
+        #d1 {
+            float: left;
+            background: #eee;            
+        }
+
+        #d2 {
+            float: left;
+            background: #aaa;
+        }
+
+        #d3 {
+            float: left;
+            background: #543212;
+        }
+        #d4 {
+            background: #654321;
+            margin-bottom: 20px;
+        }
+        #d5 {
+            background: #123456;            
+            margin-top: 30px;
+        }
+        #d6 {
+            background: #56789a;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="d1"></div>
+        <div id="d2"></div>
+        <div id="d3"></div>
+    </div>
+    <div id="container2">
+        <div id="d4"></div>
+        <div id="d5"></div>
+        <div id="d6"></div>
+    </div>
+</body>
+</html>

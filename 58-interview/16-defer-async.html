@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <img src="https://img.human123.cn/tiger.png" width=100 alt="" id="img">
+
+    <script>
+        window.addEventListener('load', function(){
+            console.log('page loaded')
+        })
+        window.addEventListener('DOMContentLoaded', function(){
+            console.log('dom ready')
+        })
+        img.addEventListener('load', function(){
+            console.log('img loaded')
+        })
+    </script>
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState === 4 && xhr.status === 200) {
+                eval(xhr.responseText)
+            }
+        }
+        xhr.open('get', 'https://img.human123.cn/util.js', true);
+        xhr.send()
+        console.log('同步脚本执行')
+    </script>
+</body>
+</html>
