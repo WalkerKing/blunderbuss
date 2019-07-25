@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>jsonp</h2>
+   
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        debugger
+        $.ajax({
+            url: 'https://test.human123.cn/api/jsonp',
+            dataType: 'jsonp',
+            data: {msg: 'hello'},
+            success: function(res){
+                console.log(res)
+            }
+        })
+        // let script = document.createElement('script')
+        // script.src = 'https://test.human123.cn/api/jsonp?cb=cb&msg=hello'
+        // document.body.appendChild(script)
+        // function cb(res) {
+        //     console.log(res) 
+        // }
+    </script>
+</body>
+</html>

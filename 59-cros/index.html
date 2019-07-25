@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>CROS</h1>
+    <div>
+        <h2>1. 跨域,简单请求</h2>
+        <button id="btn1">简单请求</button>
+        <hr>
+    </div>
+    
+    <div>
+        <h2>2. 服务端加上Access-Control-Allow-Origin</h2>
+        <button id="btn2">简单请求,携带cookie</button>
+        <p id="cookie" style="color: red"></p>
+        <ul>
+            <li>服务端Access-Control-Allow-Origin,它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</li>
+            <li>Access-Control-Allow-Credentials:它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。</li>
+            <li>withCredentials: CORS请求默认不发送Cookie和HTTP认证信息。如果要把Cookie发到服务器，一方面要服务器同意，指定Access-Control-Allow-Credentials,另一方面，开发者必须在AJAX请求中打开withCredentials属性。</li>
+        </ul>
+        
+        <hr>
+    </div>
+    <div>
+        <h2>3. 非简单请求</h2>
+        <button id="btn3">put请求</button>
+        <ul>
+            <li>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。</li>
+            <li>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。</li>
+            <li>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</li>
+        </ul>
+        <hr>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        function newXhr(opt) {
+            var xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function (e) {
+                if (xhr.readyState === 4) {
+                    if (xhr.status == 200) {
+                        opt.successCb(JSON.parse(xhr.responseText))
+                    } else {
+                        console.log(`服务器返回错误,状态码${xhr.status}`)
+                    }
+                } else {
+                    // console.log(`xhr状态错误${xhr.readyState}`)
+                }
+            }
+            if(opt.data){
+                opt.param = []
+                for(let i in opt.data) {
+                    opt.param.push(`${i}=${opt.data[i]}`)
+                }
+                if(opt.param.length > 0){
+                    opt.url += '?'
+                    opt.url += opt.param.join('&')
+                }
+                delete opt.param
+            }
+            xhr.open(opt.type, opt.url)
+            xhr.setRequestHeader("Content-type", opt.contentType || 'text/plain; charset=utf-8')
+            if(opt.withCredentials){
+                xhr.withCredentials = opt.withCredentials
+            }
+            xhr.send(opt.data)
+            return xhr
+        }
+        $('#btn1').on('click', function () {
+            let xhr = newXhr({
+                url: 'http://localhost:9000/api/cros/simple',
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded',
+                data: { name: 'Lily', age: 20 },
+                successCb: function (res) {
+
+                }
+            })
+        })
+        $('#btn2').on('click', function () {
+            let xhr = newXhr({
+                url: 'http://localhost:9000/api/cros/addAllowOrigin',
+                type: 'GET',
+                withCredentials: true,
+                contentType: 'application/x-www-form-urlencoded',
+                data: { name: 'Lily', age: 20 },
+                successCb: function (res) {
+                    $('#cookie').html(`cookie: ${JSON.stringify(res.cookie)}`)
+                }
+            })
+        })
+        $('#btn3').on('click', function () {
+            let xhr = newXhr({
+                url: 'http://localhost:9000/api/cros/put',
+                type: 'PUT',
+                contentType: 'application/x-www-form-urlencoded',
+                data: { name: 'Lily', age: 20 },
+                successCb: function (res) {
+
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
