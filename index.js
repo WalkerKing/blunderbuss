@@ -24,7 +24,7 @@ const createIndex = (list) => {
 }
 fs.readdir(path.resolve(__dirname, './'), (err, filenames) => {
     filenames = filenames.filter(v => !isNaN(v.substring(0, 2) * 1)) // 如果前两个字符可以转换为数字,则保留
-    let contentText = '#目录\n'
+    let contentText = '# 目录\n'
     filenames.forEach(v => {
         contentText += `- ${v}\n`
     }) 

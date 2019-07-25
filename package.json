@@ -4,7 +4,7 @@
   "description": "这是一个演草纸项目，在工作中遇到问题先在这里写demo进行验证",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node index.js"
   },
   "repository": {
     "type": "git",
