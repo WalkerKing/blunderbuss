@@ -1,62 +1,59 @@
-### blunderbuss
-这是一个演草纸项目，在工作中遇到问题先在这里写demo进行验证
-
-#### 目录：
-- 00 summary，合并整理相同类型的问题
-- 01 bootstrap demo
-- 02 使用ajax调用json，模拟获取到后台数据
-- 03 webuploader
-- 04 jquery 动画排队时候的bug，暂无解
-- 05 node-fs
-- 06 闭包案例
-- 07 vedio
-- 08 强制不使用cache的研究
-- 09 JS实现下载，待继续完善
-- 10 document的execCommand方法研究
-- 11 flex布局demo
-- 12 判断浏览器是否支持webGL
-- 13 实现一个加载中的动画
-- 14 node.js
-- 15 全屏
-- 16 jquery插件写法研究
-- 17 360渲染
-- 18 滚动条研究
-- 19 侦测页面是否存在
-- 20 get set
-- 21 echarts
-- 22 在一个有规律的tree查找指定id的对象
-- 23 iframe验证
-- 24 事件冒泡
-- 25 lua初识
-- 26 JavaScript设计模式与开发实践
-- 27 数据结构与算法
-- 28 混淆加密（jjencode/aaencode/rrencode/ppencode）
-- 29 使用构建工具grunt
-- 30 OOP
-- 31 居中（又是居中）
-- 32 web storage 与 onbeforeunload 合并
-- 33 zTree一个功能强大的树形插件
-- 34 js读取csv文件
-- 35 百度地图
-- 36 获取url携带的参数
-- 37 自定义一个表单验证
-- 38 html转换canvas
-- 39 web-worker
-- 40 页面重定向
-- 41 vue
-- 42 移动端开发
-- 43 数据结构
-- 44 H5 post message
-- 45 gulp项目模板
-- 46 canvas
-- 47 webpack练习
-- 48
-- 49 全景图
-- 50 vuex
-- 51 ES6
-- 52 js压缩
-- 53 mysql 学习
-- 54 mvvm 原理研究
-- 55 node 学习
-- 56 mocha测试框架
-- 57 se-lint
+#目录
+- 01-bootDemo
+- 02-ajax_for_json
+- 03-webuploader
+- 04-css
+- 06-closure
+- 07-vedio
+- 08-doNotUseCache
+- 09-download-upload
+- 10-execCommand
+- 11-flex
+- 12-hasWebGL
+- 13-loadingImg
+- 14-node-upload
+- 15-fullScreen
+- 16-jqeury_plugin
+- 17-360render
+- 18-scroll
+- 19-detect-page-isexist
+- 20-get-set
+- 21-echarts
+- 22-treeCover
+- 23-iframe
+- 24-event
+- 25-lua
+- 26-designMode
+- 27-DSWJS
+- 28-encryption
+- 29-grunt
+- 30-OOP
+- 31-center
+- 32-webStorage
+- 33-Ztree
+- 34-readCsvFile
+- 35-baiduMap
+- 36-getURLparam
+- 37-validation
+- 38-html2canvas
+- 39-web-worker
+- 40-redirect
+- 41-vue
+- 42-mobile-web
+- 43-data-constructure
+- 44-postMessage
+- 45-gulp-template
+- 46-canvas
+- 47-webpack-init
+- 48-unit-test
+- 49-panorama
+- 50-vuex
+- 51-ES6
+- 52-js-compress
+- 53-mysql
+- 54-mvvm
+- 55-node-study
+- 56-mocha
+- 57-es-lint
+- 58-interview
+- 59-cros
