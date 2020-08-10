@@ -57,3 +57,4 @@
 - 57-es-lint
 - 58-interview
 - 59-cros
+- 60-taptable
