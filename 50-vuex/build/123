@@ -1,0 +1,59 @@
+{
+    "以太网": [
+        {
+            "address": "fe80::a0d1:4026:94fd:b13a",
+            "netmask": "ffff:ffff:ffff:ffff::",
+            "family": "IPv6",
+            "mac": "e8:6a:64:d8:b6:0f",
+            "scopeid": 21,
+            "internal": false,
+            "cidr": "fe80::a0d1:4026:94fd:b13a/64"
+        },
+        {
+            "address": "172.21.6.91",
+            "netmask": "255.255.255.0",
+            "family": "IPv4",
+            "mac": "e8:6a:64:d8:b6:0f",
+            "internal": false,
+            "cidr": "172.21.6.91/24"
+        }
+    ],
+    "Loopback Pseudo-Interface 1": [
+        {
+            "address": "::1",
+            "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+            "family": "IPv6",
+            "mac": "00:00:00:00:00:00",
+            "scopeid": 0,
+            "internal": true,
+            "cidr": "::1/128"
+        },
+        {
+            "address": "127.0.0.1",
+            "netmask": "255.0.0.0",
+            "family": "IPv4",
+            "mac": "00:00:00:00:00:00",
+            "internal": true,
+            "cidr": "127.0.0.1/8"
+        }
+    ],
+    "vEthernet (Default Switch)": [
+        {
+            "address": "fe80::4d54:731b:13b5:3751",
+            "netmask": "ffff:ffff:ffff:ffff::",
+            "family": "IPv6",
+            "mac": "00:15:5d:f3:a1:e7",
+            "scopeid": 25,
+            "internal": false,
+            "cidr": "fe80::4d54:731b:13b5:3751/64"
+        },
+        {
+            "address": "172.17.103.225",
+            "netmask": "255.255.255.240",
+            "family": "IPv4",
+            "mac": "00:15:5d:f3:a1:e7",
+            "internal": false,
+            "cidr": "172.17.103.225/28"
+        }
+    ]
+}
