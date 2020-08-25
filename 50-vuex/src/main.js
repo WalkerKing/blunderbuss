@@ -6,6 +6,8 @@ import router from './router';
 
 require('animate.css');
 
+window.console.warn = function () {};
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

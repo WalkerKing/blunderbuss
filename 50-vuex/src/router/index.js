@@ -17,5 +17,12 @@ export default new Router({
             name: 'keyboard',
             component: Keyboard,
         },
+        {
+            path: '/money',
+            name: 'money',
+            component(resolve) {
+                require(['@/components/money'], resolve);
+            },
+        },
     ],
 });

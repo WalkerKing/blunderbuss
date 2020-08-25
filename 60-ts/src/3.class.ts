@@ -11,11 +11,11 @@ let greeter = new Greeter('world');
 console.log(greeter.greet());
 
 class Animal {
-    name: string;
-    constructor(theName: string) {
+    public name: string;
+    public constructor(theName: string) {
         this.name = theName;
     }
-    move(distanceInmeters: number = 0) {
+    public move(distanceInmeters: number = 0) {
         console.log(`Animal moved ${distanceInmeters}.`)
     }
 }
@@ -55,13 +55,3 @@ let sam = new Snake('Sammy the python');
 let tom: Animal = new Horse('Tommy the Palomino');
 sam.move();
 tom.move(34);
-
-// proxyTable: {
-//         '/user/get-list': {
-//             target: 'http://adminapi.dev.koibone.net/',
-//             changeOrigin: true,
-//             // pathRewrite: {
-//             //     '^/api': '/'
-//             // }
-//         },
-//     }

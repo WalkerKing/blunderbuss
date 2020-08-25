@@ -76,12 +76,3 @@ var sam = new Snake('Sammy the python');
 var tom = new Horse('Tommy the Palomino');
 sam.move();
 tom.move(34);
-// proxyTable: {
-//         '/user/get-list': {
-//             target: 'http://adminapi.dev.koibone.net/',
-//             changeOrigin: true,
-//             // pathRewrite: {
-//             //     '^/api': '/'
-//             // }
-//         },
-//     }
