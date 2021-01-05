@@ -13,7 +13,7 @@
     "test:headless": "HTTP_PROXY=http://192.168.100.128:8224 npx cypress run --config watchForFileChanges=true"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "clipboard": "^2.0.0",
     "codemirror": "^5.38.0",
     "countup": "^1.8.2",
